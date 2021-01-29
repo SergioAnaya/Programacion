@@ -27,42 +27,50 @@ public class TestTiempoOperaciones {
         return tiempoEjecucion;
     }
 
-    public long borrarElementosMitadDeLista (int numElementos) {
+    public long borrarElementosMitadDeLista (int numElementos, int posicion) {
         int mitadLista = lista.size() / 2;
         long instanteInicio = System.currentTimeMillis();
-        for (int i = 1; i <= numElementos; i++) {
-            lista.remove(mitadLista);
+        if (posicion == MITAD_LISTA) {
+            for (int i = 1; i <= numElementos; i++) {
+                lista.remove(mitadLista);
+            }
         }
         long tiempoEjecucion = System.currentTimeMillis() - instanteInicio;
 
         return tiempoEjecucion;
     }
 
-    public long borrarElementosInicioDeLista (int numElementos) {
+    public long borrarElementosInicioDeLista (int numElementos, int posicion) {
         long instanteInicio = System.currentTimeMillis();
-        for (int i = 1; i <= numElementos; i++) {
-            lista.remove(0);
+        if (posicion == INICIO_LISTA) {
+            for (int i = 1; i <= numElementos; i++) {
+                lista.remove(0);
+            }
         }
         long tiempoEjecucion = System.currentTimeMillis() - instanteInicio;
 
         return tiempoEjecucion;
     }
 
-    public long insertarEnInicioDeLista (int numElementos) {
+    public long insertarEnInicioDeLista (int numElementos, int posicion) {
         long instanteInicio = System.currentTimeMillis();
-        for (int i = 1; i <= numElementos; i++) {
-            lista.add(i);
+        if (posicion == INICIO_LISTA) {
+            for (int i = 1; i <= numElementos; i++) {
+                lista.add(i);
+            }
         }
         long tiempoEjecucion = System.currentTimeMillis() - instanteInicio;
 
         return tiempoEjecucion;
     }
 
-    public long insertarEnMitadDeLista (int numElementos) {
+    public long insertarEnMitadDeLista (int numElementos, int posicion) {
         int mitadLista = lista.size() / 2;
         long instanteInicio = System.currentTimeMillis();
-        for (int i = 1; i <= numElementos; i++) {
-            lista.add(mitadLista, i);
+        if (posicion == MITAD_LISTA) {
+            for (int i = 1; i <= numElementos; i++) {
+                lista.add(mitadLista, i);
+            }
         }
         long tiempoEjecucion = System.currentTimeMillis() - instanteInicio;
 
