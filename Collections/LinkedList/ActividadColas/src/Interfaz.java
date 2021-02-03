@@ -36,16 +36,31 @@ public class Interfaz {
 
     public void menuAñadirPaciente () {
 
-        System.out.println("Nombre: ");
+        System.out.print("Nombre: ");
         String nombre = teclado.nextLine();
-        System.out.println("Edad: ");
+        System.out.print("Edad: ");
         int edad = teclado.nextInt();
         teclado.nextLine();
         System.out.println("Id de especialidad: ");
+        especialidades();
         int idEspecialidad = teclado.nextInt();
         teclado.nextLine();
-        System.out.println("Incidencia de gravedad: ");
+        System.out.print("Incidencia de gravedad: ");
         String incidenciaGravedad = teclado.nextLine().toLowerCase();
         paciente = new Paciente(nombre, edad, idEspecialidad, incidenciaGravedad);
+    }
+
+    public void especialidades () {
+        System.out.println("1. Neumología" +
+                "\n2. Cardiología" +
+                "\n3. Toxicología" +
+                "\n4. Pediatría" +
+                "\n5. Psiquiatría" +
+                "\n6. Radiología" +
+                "\n7. Digestivo" +
+                "\n8. Traumatología" +
+                "\n9. Otorrino-laringología" +
+                "\n10. Cirugía" +
+                "\n11. Oftalmología");
     }
 }

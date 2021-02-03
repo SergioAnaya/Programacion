@@ -14,6 +14,8 @@ public class Colas {
     LinkedList<Paciente> cirugia = new LinkedList<Paciente>();
     LinkedList<Paciente> oftalmologia = new LinkedList<Paciente>();
 
+    // Contadores para insertar los pacientes graves en orden
+
     int countneumologia = 0;
     int countcardiologia = 0;
     int counttoxicologia = 0;
@@ -30,7 +32,7 @@ public class Colas {
 
         if (paciente.getIdEpecialidad() == 1) {
             if (paciente.getIncidenciaGravedad().equals("muy grave")) {
-                neumologia.add(paciente);
+                neumologia.add(countneumologia, paciente);
                 countneumologia++;
             } else if (paciente.getIncidenciaGravedad().equals("estable")){
                 neumologia.add(paciente);
@@ -111,27 +113,38 @@ public class Colas {
     public void mostrarSiguientePaciente () {
         if (!neumologia.isEmpty()) {
             System.out.println(neumologia.pop());
+            countneumologia = 0; // Estos declaran el contador a 0 para cuando se elemine un paciente pueda seguir usandose el contador correctamente al agregar nuevos
         } else if (!cardiologia.isEmpty()) {
             System.out.println(cardiologia.pop());
+            countcardiologia = 0;
         } else if (!toxicologia.isEmpty()) {
             System.out.println(toxicologia.pop());
+            counttoxicologia = 0;
         } else if (!pediatria.isEmpty()) {
             System.out.println(pediatria.pop());
+            countpediatria = 0;
         } else if (!psiquiatria.isEmpty()) {
             System.out.println(psiquiatria.pop());
+            countpsiquiatria = 0;
         } else if (!radiologia.isEmpty()) {
             System.out.println(radiologia.pop());
+            countradiologia = 0;
         } else if (!digestivo.isEmpty()) {
             System.out.println(digestivo.pop());
+            countdigestivo = 0;
         } else if (!traumatologia.isEmpty()) {
             System.out.println(traumatologia.pop());
+            counttraumatologia = 0;
         } else if (!otorrinoLaringologia.isEmpty()) {
             System.out.println(otorrinoLaringologia.pop());
+            countotorrinoLaringologia = 0;
         } else if (!cirugia.isEmpty()) {
             System.out.println(cirugia.pop());
+            countcirugia = 0;
         } else if (!oftalmologia.isEmpty()) {
             System.out.println(oftalmologia.pop());
-        }
+            countoftalmologia = 0;
+        } else System.out.println("No hay pacientes en las colas");
     }
 
     @Override
