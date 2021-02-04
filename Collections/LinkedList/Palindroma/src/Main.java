@@ -44,7 +44,7 @@ public class Main {
         boolean palindrome = true;
 
         while (!cola.isEmpty()) {
-            if (pila.pop() != cola.pop()) {
+            if (pila.pop() != cola.poll()) {
                 palindrome = false;
             }
         }
