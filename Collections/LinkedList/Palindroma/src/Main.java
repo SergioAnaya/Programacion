@@ -8,8 +8,8 @@ public class Main {
 
         Scanner teclado = new Scanner(System.in);
 
-        LinkedList<Character> cola = new LinkedList<>();
         LinkedList<Character> pila = new LinkedList<>();
+        LinkedList<Character> cola = new LinkedList<>();
 
         int countLetras = 0;
         int countEspaciosEnBlanco = 0;
@@ -22,8 +22,8 @@ public class Main {
         // Añadir la frase filtrada sa la cola y la lista
 
         for (int i = 0; i < fraseFiltrada.length(); i++) {
-            cola.add(fraseFiltrada.charAt(i));
-            pila.add(fraseFiltrada.charAt(i));
+            pila.addFirst(fraseFiltrada.charAt(i));
+            cola.addLast(fraseFiltrada.charAt(i));
         }
 
         // Contador de Letras y Espacios en Blanco
@@ -44,7 +44,7 @@ public class Main {
         boolean palindrome = true;
 
         while (!cola.isEmpty()) {
-            if (pila.pop() != cola.remove(pila.size())) {
+            if (pila.pop() != cola.pop()) {
                 palindrome = false;
             }
         }
@@ -53,6 +53,5 @@ public class Main {
         if (palindrome) {
             System.out.println("\nLa frase es palindrome");
         } else System.out.println("\nLa frase no es palindrome");
-
     }
 }
