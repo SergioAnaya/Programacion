@@ -81,6 +81,7 @@ public class Nodo {
         }
     }
 
+    // En otro Orden
     // Nodo Contenedor - Nodo Izq - Nodo Der
 
     public void recorridoEnOrden2 () {
@@ -93,7 +94,7 @@ public class Nodo {
         }
     }
 
-    /*Quería aprender a hacerlo y he buscado info, (Operador condicional ternario)
+    /*Busqué info para ver como podía hacerlo más visual, (Operador condicional ternario)
     si se cumple el booleano left en este caso, se realiza la primera expresión ("|--") y
     si no se cumple se realiza la segunda expresión ("\\--")*/
 

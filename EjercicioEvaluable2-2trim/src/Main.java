@@ -7,8 +7,7 @@ public class Main {
         arbol.addValor(1);
         arbol.addValor(5);
         arbol.addValor(2);
-
-
+        
         if (arbol.inArbol(20)) {
             System.out.println("\nEse nodo SI existe en el árbol\n");
         } else System.out.println("\nEse nodo NO existe en el árbol\n");
