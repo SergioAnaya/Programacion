@@ -1,22 +1,22 @@
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Mesa {
 
+    Producto producto = new Producto();
+
     int identificadorMesa;
+    List<Producto> productos = new LinkedList<>(); // Esta lista es un atributo de la mesa, para ir añadiendo los productos
 
-    Producto producto1 = new Producto("Churro", 0.50);
-    Producto producto2 = new Producto("Café con leche", 1.00);
-    Producto producto3 = new Producto("Tostada", 1.50);
-    Producto producto4 = new Producto("Zumo de naranja", 2.00);
-
-    List<Producto> productos = new LinkedList<>(Arrays.asList(producto1, producto2, producto3, producto4));
-
-    public Mesa() {}
+    public Mesa () {}
 
     public Mesa(int identificadorMesa) {
         this.identificadorMesa = identificadorMesa;
+    }
+
+    public Mesa(int identificadorMesa, List<Producto> productos) {
+        this.identificadorMesa = identificadorMesa;
+        this.productos = productos;
     }
 
     public int getIdentificadorMesa() {
@@ -25,5 +25,21 @@ public class Mesa {
 
     public void setIdentificadorMesa(int identificadorMesa) {
         this.identificadorMesa = identificadorMesa;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
+    @Override
+    public String toString() {
+        return "\n---------------------------------" +
+                "\n             Mesa " + identificadorMesa +
+                "\n---------------------------------" +
+                "\nProductos: \n" + productos + "\n";
     }
 }

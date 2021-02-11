@@ -3,22 +3,46 @@ import java.util.List;
 
 public class Cafeteria {
 
-    Mesa mesa = new Mesa();
-    Interfaz interfaz = new Interfaz();
-
-    //List<Mesa> mesas = new LinkedList<>();
-    List<List<Producto>> mesas = new LinkedList<>();
-    List<Producto> carta = mesa.productos;
+    static List<Mesa> mesas = new LinkedList<>();
+    List<Producto> carta = new LinkedList<>();
 
     double caja;
+    static int countMesas = 0;
 
-    public Mesa getMesa (int numMesa) {
-        return mesa;
+    public int getCountMesas() {
+        return countMesas;
     }
 
-    /*public List<Mesa> getMesas () {
+    public Mesa getMesa (int numMesa) {
+        Mesa resultado = null;
+        for (Mesa mesa : mesas) {
+            if (mesa.getIdentificadorMesa() == numMesa) {
+                resultado = mesa;
+            }
+        }
+        return resultado;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public List<Mesa> getMesas () {
         return mesas;
-    }*/
+    }
 
     public double getCaja() {
         return caja;
@@ -41,15 +65,35 @@ public class Cafeteria {
     }
 
     public int abrirMesa () {
-        return 1;
+        mesas.add(new Mesa(countMesas + 1));
+        countMesas++;
+        return countMesas;
     }
 
-    // Método para crear x número de mesas
+    // Método para abrir las mesas iniciales
 
-    public void abrirMesasIniciales (int numeroMesas) {
-        for (int i = 0; i < numeroMesas; i++) {
-            mesas.add(new LinkedList<>());
+    public void abrirMesasIniciales (int numMesas) {
+        for (int i = 0; i < numMesas; i++) {
+            countMesas++;
+            mesas.add(i, new Mesa(countMesas));
         }
+        System.out.println("Se han abierto " + numMesas + " mesas.");
     }
 
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public String toString() {
+        return "Cafeteria{" +
+                "mesas=" + mesas +
+                '}';
+    }
 }
