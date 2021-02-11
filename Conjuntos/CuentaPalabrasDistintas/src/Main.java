@@ -1,7 +1,8 @@
-import java.text.Normalizer;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Scanner;
+import java.text.Normalizer;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.TreeSet;
 
 public class Main {
 
@@ -12,7 +13,7 @@ public class Main {
         System.out.println("Introduce la frase: ");
         String frase = teclado.nextLine();
         String fraseFiltrada = Normalizer.normalize(frase, Normalizer.Form.NFD); // Normalizer transforma (x, con x forma) en este caso la forma es Canonical Descomposition
-        fraseFiltrada = fraseFiltrada.toLowerCase().replaceAll("[\\p{InCombiningDiacriticalMarks}]"," ");
+        fraseFiltrada = fraseFiltrada.toLowerCase().replaceAll("[\\p{InCombiningDiacriticalMarks}]","");
         fraseFiltrada = fraseFiltrada.replaceAll(",\\n", "");
 
         // Creo un array con las partes separadas (El delimitador de las palabras es espacio en blanco)
@@ -23,10 +24,10 @@ public class Main {
 
         HashSet<String> fraseSalida = new HashSet<>(Arrays.asList(partes));
 
+        // Lo añado a un TreeSet para que se ordene
 
-        for (int i = 0; i < partes.length; i++) {
-            System.out.println(partes[i]);
-        }
-        System.out.println(fraseSalida);
+        TreeSet myTreeSet = new TreeSet();
+        myTreeSet.addAll(fraseSalida);
+        System.out.println(myTreeSet);
     }
 }
