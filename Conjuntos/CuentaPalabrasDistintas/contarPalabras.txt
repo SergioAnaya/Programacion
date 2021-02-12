@@ -1,0 +1,2 @@
+Hay 3 palabras en total.
+[adios, buenas, hola]
