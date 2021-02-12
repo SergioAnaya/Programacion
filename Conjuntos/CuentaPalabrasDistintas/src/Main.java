@@ -3,13 +3,6 @@ import java.io.IOException;
 import java.util.*;
 import java.text.Normalizer;
 
-/**
- *
- * @author Sergio Anaya Marin
- * @link
- *
- */
-
 public class Main {
 
     public static void main(String[] args) throws IOException {
