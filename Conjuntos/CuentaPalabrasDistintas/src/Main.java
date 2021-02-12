@@ -1,9 +1,22 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.text.Normalizer;
 
+/**
+ *
+ * @author Sergio Anaya Marin
+ * @link
+ *
+ */
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        // Guardar en fichero
+
+        FileWriter fichero = new FileWriter("contarPalabras.txt");
 
         Scanner teclado = new Scanner(System.in);
 
@@ -39,5 +52,9 @@ public class Main {
         System.out.println(myTreeSet);
 
         System.out.println("Hay " + contadorPalabras + " palabras en total.");
+        fichero.write("Hay " + contadorPalabras + " palabras en total.");
+        fichero.write("\n" + myTreeSet);
+
+        fichero.close();
     }
 }

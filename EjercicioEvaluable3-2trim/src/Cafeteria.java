@@ -5,7 +5,6 @@ public class Cafeteria {
 
     static List<Mesa> mesas = new LinkedList<>();
     List<Producto> carta = new LinkedList<>();
-
     double caja;
     static int countMesas = 0;
 
@@ -22,23 +21,6 @@ public class Cafeteria {
         }
         return resultado;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public List<Mesa> getMesas () {
         return mesas;
@@ -79,16 +61,6 @@ public class Cafeteria {
         }
         System.out.println("Se han abierto " + numMesas + " mesas.");
     }
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public String toString() {

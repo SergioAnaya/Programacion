@@ -26,7 +26,7 @@ public class VistaCafeteria {
 
         int accion = interfaz.OP_NO_DEFINIDA;
 
-        interfaz.menuNumeroMesasAbiertas(); // funciona
+        interfaz.menuNumeroMesasAbiertas();
 
         do {
             accion = interfaz.menuPrincipal();
@@ -34,13 +34,6 @@ public class VistaCafeteria {
                 vistaCafeteria.programaPrincipal(accion);
             }
         } while (accion != interfaz.OP_TERMINAR);
-
-
-
-        /*interfaz.menuSeleccionMesa(); // funciona*/
-
-        /*interfaz.imprimirSeleccionMesa();
-        interfaz.imprimirEnseñarMesaSeleccionada(interfaz.leerRespuestaMenuSeleccionMesa());*/
 
     }
 }

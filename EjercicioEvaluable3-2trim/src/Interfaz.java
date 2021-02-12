@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Interfaz {
 
     Scanner teclado = new Scanner(System.in);
-
     Cafeteria cafeteria = new Cafeteria();
 
     // Constantes del menú principal
@@ -16,13 +15,14 @@ public class Interfaz {
     public final static int OP_ABRIR_MESA = 5;
     public final static int OP_TERMINAR = 6;
 
-    // Constantes para añadir los productos, uso también la constante del menú principal de OP_TERMINAR
+    // Constantes para añadir los productos
 
     public final static int OP_BORRAR_CUENTA = -1;
     public final static int OP_AÑADIR_CHURRO = 1;
     public final static int OP_AÑADIR_CAFE_CON_LECHE = 2;
     public final static int OP_AÑADIR_TOSTADA = 3;
     public final static int OP_AÑADIR_ZUMO_NATURAL = 4;
+    public final static int OP_TERMINAR_AÑADIR_PRODUCTO = 0;
 
     // Constantes para indicar el número mínimo de mesas iniciales
 
@@ -83,7 +83,7 @@ public class Interfaz {
     public void imprimirVistasMesas (int accion) {
         if (accion > cafeteria.getCountMesas()) {
             System.out.println("No existe esa mesa");
-        } else if (accion == 0) {
+        } else if (accion == OP_CONSULTAR_TODAS_LAS_MESAS) {
             System.out.println(cafeteria.getMesas());
         } else {
             if (cafeteria.getMesa(accion) == null) {
