@@ -1,11 +1,17 @@
 import java.util.Scanner;
 
+/**
+ * Esta clase contiene todo lo relacionado a imprimir la interfaz
+ */
+
 public class Interfaz {
 
     Scanner teclado = new Scanner(System.in);
     Cafeteria cafeteria = new Cafeteria();
 
-    // Constantes del menú principal
+    /**
+     * Constantes del menú principal
+     */
 
     public final static int OP_NO_DEFINIDA = 0;
     public final static int OP_CONSULTAR_MESAS = 1;
@@ -15,7 +21,9 @@ public class Interfaz {
     public final static int OP_ABRIR_MESA = 5;
     public final static int OP_TERMINAR = 6;
 
-    // Constantes para añadir los productos
+    /**
+     * Constantes para añadir los productos
+     */
 
     public final static int OP_BORRAR_CUENTA = -1;
     public final static int OP_AÑADIR_CHURRO = 1;
@@ -24,15 +32,21 @@ public class Interfaz {
     public final static int OP_AÑADIR_ZUMO_NATURAL = 4;
     public final static int OP_TERMINAR_AÑADIR_PRODUCTO = 0;
 
-    // Constantes para indicar el número mínimo de mesas iniciales
+    /**
+     * Constantes para indicar el número mínimo de mesas iniciales
+     */
 
     public final static int NUMERO_MINIMO_MESAS_INICIALES = 1;
 
-    // Constante para consultar todas las mesas
+    /**
+     * Constante para consultar todas las mesas
+     */
 
     public final static int OP_CONSULTAR_TODAS_LAS_MESAS = 0;
 
-    // Menú de mesas iniciales
+    /**
+     * Menú de mesas iniciales
+     */
 
     public void imprimirNumeroMesasAbiertas () {
         System.out.print("Número de mesas abiertas: ");
@@ -47,7 +61,9 @@ public class Interfaz {
         cafeteria.abrirMesasIniciales(leerRespuestaMenuNumeroMesasAbiertas());
     }
 
-    // Menú principal del a aplicación
+    /**
+     * Menú principal del a aplicación
+     */
 
     public void imprimirMenuPrincipal () {
         System.out.println("\n********************************************" +
@@ -67,7 +83,9 @@ public class Interfaz {
         return leerRespuestaMenuPrincipal();
     }
 
-    // Menú para consultar mesas, he modificado un poco el mecanismo para elegir si quieres ver 1 mesa en particular o todas a la vez
+    /**
+     * Menú para consultar mesas, he modificado un poco el mecanismo para elegir si quieres ver 1 mesa en particular o todas a la vez
+     */
 
     public void imprimirConsultarMesas () {
         System.out.print("Si desea consultar una mesa en específico indique el número de mesa, si desea consultar todas introduce 0: ");
@@ -94,7 +112,9 @@ public class Interfaz {
         }
     }
 
-    // Menú de selección de mesa a la hora de añadir productos
+    /**
+     * Menú de selección de mesa a la hora de añadir productos
+     */
 
     public void imprimirSeleccionMesa () {
         System.out.print("Número de mesa [" + NUMERO_MINIMO_MESAS_INICIALES + "-" + cafeteria.getCountMesas() + "]: ");
@@ -120,7 +140,9 @@ public class Interfaz {
 
     }
 
-    // Menú para añadir producto
+    /**
+     * Menú para añadir producto
+     */
 
     public void imprimirAñadirProductoAMesa () {
             System.out.print("Número de producto [0 -> terminar. -1 -> borrar cuenta]");
@@ -128,7 +150,9 @@ public class Interfaz {
 
     public int leerRespuestaMenuAñadirProductosAMesa () { return teclado.nextInt(); }
 
-    // Imprimir el abrir 1 mesa nueva
+    /**
+     * Imprimir el abrir mesa nueva
+     */
 
     public void imprimirAbrirMesaNueva () {
         System.out.println("Se ha abierto correctamente la mesa " + cafeteria.abrirMesa());

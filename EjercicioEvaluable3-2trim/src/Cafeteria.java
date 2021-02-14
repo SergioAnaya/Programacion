@@ -1,6 +1,10 @@
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Esta clase contiene los métodos a usar para el funcionamiento de la aplicación
+ */
+
 public class Cafeteria {
 
     static List<Mesa> mesas = new LinkedList<>();
@@ -11,6 +15,12 @@ public class Cafeteria {
     public int getCountMesas() {
         return countMesas;
     }
+
+    /**
+     * Método para ver el contenido de una mesa en particular
+     * @param numMesa Este parámetro se usa para indicar el número de mesa a buscar mediante el identificador de la mesa
+     * @return devuelve el objeto mesa
+     */
 
     public Mesa getMesa (int numMesa) {
         Mesa resultado = null;

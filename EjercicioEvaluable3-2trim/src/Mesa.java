@@ -1,6 +1,10 @@
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Clase del objeto mesa
+ */
+
 public class Mesa {
 
     Producto producto = new Producto();

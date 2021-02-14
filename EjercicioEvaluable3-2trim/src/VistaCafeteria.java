@@ -1,3 +1,10 @@
+/**
+ * @author Sergio Anaya Marín
+ *
+ * Esta clase contiene las llamadas a los métodos para mostrar la interfaz
+ */
+
+
 public class VistaCafeteria {
 
     Cafeteria cafeteria = new Cafeteria();

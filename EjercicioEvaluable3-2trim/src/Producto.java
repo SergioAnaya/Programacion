@@ -1,7 +1,15 @@
+/**
+ * Clase del objeto producto
+ */
+
 public class Producto {
 
     String nombreProducto;
     double precioProducto;
+
+    /**
+     * Definición de los productos por defecto
+     */
 
     public final static Producto producto1 = new Producto("Churro", 0.50);
     public final static Producto producto2 = new Producto("Café con leche", 1.00);
