@@ -7,10 +7,13 @@ import java.util.List;
 
 public class Mesa {
 
-    Producto producto = new Producto();
-
     int identificadorMesa;
-    List<Producto> productos = new LinkedList<>(); // Esta lista es un atributo de la mesa, para ir añadiendo los productos
+
+    /**
+     * Esta lista es un atributo de la mesa que contiene los productos de dicha mesa
+     */
+
+    List<Producto> productos = new LinkedList<>();
 
     public Mesa () {}
 
