@@ -77,7 +77,7 @@ public class Interfaz {
      */
 
     public void mensajeMesaNuevaAbierta () {
-        System.out.println("Se ha abierto correctamente la mesa ");
+        System.out.print("Se ha abierto correctamente la mesa ");
     }
 
     /**
@@ -94,6 +94,44 @@ public class Interfaz {
 
     public void mensajeTotalDeCaja () {
         System.out.print("Total: ");
+    }
+
+    /**
+     * Mensaje de cobro de mesa
+     */
+
+    public void mensajeCobroMesa () {
+        System.out.println("Cuenta:\n");
+    }
+
+    /**
+     *
+     * @return
+     */
+
+    public int leerRespuestaMenuCobrarMesa () { return teclado.nextInt(); }
+
+    /**
+     *
+     */
+
+    public void mensajeAbrirMesa () {
+        System.out.print("¿Abrir nueva mesa [s]/n?");
+    }
+
+    public String leerAbrirMesa () { return teclado.next(); }
+
+    public String abrirMesa () {
+        mensajeAbrirMesa();
+        return leerAbrirMesa();
+    }
+
+    public void mensajeNoAbrirMesa () {
+        System.out.println("No se ha abierto ninguna mesa.");
+    }
+
+    public void mensajeControlDeEntradaAbrirMesa () {
+        System.out.println("Debes introducir la opción 's' o 'n'.");
     }
 
 

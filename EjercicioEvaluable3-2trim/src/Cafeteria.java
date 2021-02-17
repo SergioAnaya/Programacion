@@ -23,17 +23,11 @@ public class Cafeteria {
     final static int OP_TERMINAR_AÑADIR_PRODUCTO = 0;
 
     static List<Mesa> mesas = new LinkedList<>();
-    double caja;
+    double caja = 0;
     List<Producto> carta = new LinkedList<>(Arrays.asList(Producto.producto1, Producto.producto2, Producto.producto3, Producto.producto4));
 
     /**
-     *
-     */
-
-    List<Producto> pedido = new LinkedList<>();
-
-    /**
-     * Contador de las mesas abiertas
+     * Contador para controlar el total de las mesas abiertas
      */
 
     static int countMesas = 0;
@@ -56,6 +50,12 @@ public class Cafeteria {
         System.out.println("Se han abierto " + numMesas + " mesas.");
     }
 
+    /**
+     * Método para obtener una mesa según su identificador
+     * @param numMesa Este parámetro indica el número de la mesa que se quiere buscar
+     * @return Devuelve la propia mesa
+     */
+
     public Mesa getMesa (int numMesa) {
         Mesa resultado = null;
         for (Mesa mesa : mesas) {
@@ -66,20 +66,26 @@ public class Cafeteria {
         return resultado;
     }
 
+    /**
+     * Método para devolver todas las mesas
+     * @return Devuelve todas las mesas
+     */
+
     public List<Mesa> getMesas() {
         return mesas;
     }
+
+    /**
+     * Método para devolver el total de la caja
+     * @return Devuelve el valor total de la caja hecha
+     */
 
     public double getCaja() {
         return caja;
     }
 
     /**
-     *
-     */
-
-    /**
-     *
+     * Contadores para mostrar el resumen de los productos agregados
      */
 
     int countChurro = 0;
@@ -87,59 +93,93 @@ public class Cafeteria {
     int countTostada = 0;
     int countZumoNatural = 0;
 
+    /**
+     * Método que devuelve la mesa y añade los productos que se le indiquen, también permite borrar los productos de la mesa
+     * @param numProducto Este parámetro indica el producto que se quiere añadir, también sirve para terminar de añadir los productos
+     *                    con la opción 0 y para borrar los productos de la mesa con la opción -1
+     * @param numMesa Este parámetro indica el número de la mesa con la que se trabajará
+     */
+
     public void addProducto (int numProducto, int numMesa) {
-
-
 
         if (numMesa == getMesa(numMesa).getIdentificadorMesa()) {
             if (numProducto == OP_AÑADIR_CHURRO) {
                 System.out.print("Cantidad: ");
                 int cantidad = teclado.nextInt();
                 for (int i = 0; i < cantidad; i++) {
-                    pedido.add(carta.get(0));
-                    getMesa(numMesa).setProductos(pedido);
-                    countChurro++;
+                    getMesa(numMesa).getProductos().add(carta.get(0));
                 }
             } else if (numProducto == OP_AÑADIR_CAFE_CON_LECHE) {
                 System.out.print("Cantidad: ");
                 int cantidad = teclado.nextInt();
                 for (int i = 0; i < cantidad; i++) {
-                    pedido.add(carta.get(1));
-                    getMesa(numMesa).setProductos(pedido);
-                    countCafeConLeche++;
+                    getMesa(numMesa).getProductos().add(carta.get(1));
                 }
             } else if (numProducto == OP_AÑADIR_TOSTADA) {
                 System.out.print("Cantidad: ");
                 int cantidad = teclado.nextInt();
                 for (int i = 0; i < cantidad; i++) {
-                    pedido.add(carta.get(2));
-                    getMesa(numMesa).setProductos(pedido);
-                    countTostada++;
+                    getMesa(numMesa).getProductos().add(carta.get(2));
                 }
             } else if (numProducto == OP_AÑADIR_ZUMO_NATURAL) {
                 System.out.print("Cantidad: ");
                 int cantidad = teclado.nextInt();
                 for (int i = 0; i < cantidad; i++) {
-                    pedido.add(carta.get(3));
-                    getMesa(numMesa).setProductos(pedido);
-                    countZumoNatural++;
+                    getMesa(numMesa).getProductos().add(carta.get(3));
                 }
             } else if (numProducto == OP_BORRAR_CUENTA) {
-                pedido.clear();
                 countChurro = 0;
                 countCafeConLeche = 0;
                 countTostada = 0;
                 countZumoNatural = 0;
-                System.out.println("\nMesa borrada correctamente.");
+                borrarProductos(numMesa);
             } else System.out.println("Ese producto no existe.");
         }
     }
 
     /**
-     *
+     * Método para borrar los productos añadidos a la mesa
+     * @param numMesa Este párametro indica el número de mesa del que queremos borrar
      */
 
-    public void contadorProductos () {
+    public void borrarProductos (int numMesa) {
+        if (numMesa == getMesa(numMesa).getIdentificadorMesa()) {
+            getMesa(numMesa).getProductos().clear();
+            System.out.println("\nSe han borrado los productos correctamente.");
+        }
+    }
+
+    /**
+     * Método que recorre los productos de la mesa especificada y los añade al contador
+     * @param numMesa Este parámetro indica el número de la mesa con la que se trabajará
+     */
+
+    public void contadorProductos (int numMesa) {
+
+        countChurro = 0;
+        countCafeConLeche = 0;
+        countTostada = 0;
+        countZumoNatural = 0;
+
+        for (int i =0; i < getMesa(numMesa).getProductos().size(); i++) {
+            if (getMesa(numMesa).getProductos().get(i).getNombreProducto().equals("Churro")) {
+                countChurro++;
+            } else if (getMesa(numMesa).getProductos().get(i).getNombreProducto().equals("Café con leche")) {
+                countCafeConLeche++;
+            } else if (getMesa(numMesa).getProductos().get(i).getNombreProducto().equals("Tostada")) {
+                countTostada++;
+            } else if (getMesa(numMesa).getProductos().get(i).getNombreProducto().equals("Zumo de naranja")) {
+                countZumoNatural++;
+            }
+        }
+    }
+
+    /**
+     * Método que imprime el contador de productos, este método se usa a la hora de añadir un producto y de cobrarlo
+     */
+
+    public void imprimirContadorProductos () {
+
         System.out.println("\n");
         if (countChurro != 0) {
             System.out.println(countChurro + " x Churro");
@@ -150,31 +190,53 @@ public class Cafeteria {
         } if (countZumoNatural != 0) {
             System.out.println(countZumoNatural + " x Zumo natural");
         }
-        System.out.println("\n---------------------------------");
+        System.out.println("---------------------------------");
     }
 
-    public void borrarProductos (int numMesa) {
-
-    }
+    /**
+     * Este método usa los métodos de contadorProductos y imprimirContadorProductos para imprimir el resumen de los productos y
+     * también suma el precio de todos los productos de la mesa
+     * @param numMesa Este parámetro indica el número de la mesa con la que se trabajará
+     * @return Devuelve la suma total del precio de los productos de la mesa
+     */
 
     public double cobrarMesa (int numMesa) {
-        return caja;
+
+        contadorProductos(numMesa);
+
+        imprimirContadorProductos();
+
+        double total = 0;
+
+        if (numMesa == getMesa(numMesa).getIdentificadorMesa()) {
+            total += countChurro * 0.50;
+            total += countCafeConLeche * 1.00;
+            total += countTostada * 1.50;
+            total += countZumoNatural * 2.00;
+
+            caja += total;
+        }
+
+        return total;
     }
+
+    /**
+     * Método que devuelve todos los productos que se ofrecen
+     * @return
+     */
 
     public List<Producto> getCarta() {
         return carta;
     }
 
+    /**
+     * Método para abrir una mesa nueva
+     * @return Devuelve el número de mesa que se acaba de abrir
+     */
+
     public int abrirMesa () {
         mesas.add(new Mesa(countMesas + 1));
         countMesas++;
         return countMesas;
-    }
-
-    @Override
-    public String toString() {
-        return "Cafeteria{" +
-                "mesas=" + mesas +
-                '}';
     }
 }
