@@ -150,7 +150,7 @@ public class Cafeteria {
     }
 
     /**
-     * Método que recorre los productos de la mesa especificada y los añade al contador
+     * Método que recorre los productos de la mesa especificada y va añadiendo al contador si existen
      * @param numMesa Este parámetro indica el número de la mesa con la que se trabajará
      */
 
@@ -175,7 +175,7 @@ public class Cafeteria {
     }
 
     /**
-     * Método que imprime el contador de productos, este método se usa a la hora de añadir un producto y de cobrarlo
+     * Método que imprime el contador de productos en caso de que no sea 0, este método se usa a la hora de añadir un producto y de cobrarlo
      */
 
     public void imprimirContadorProductos () {
@@ -194,17 +194,24 @@ public class Cafeteria {
     }
 
     /**
-     * Este método usa los métodos de contadorProductos y imprimirContadorProductos para imprimir el resumen de los productos y
-     * también suma el precio de todos los productos de la mesa
+     * Este método cuenta e imprime los productos de la mesa que pidamos,
+     * este método se usa al finalizar de añadir los productos se imprime
+     * para mostrar el resumen de todos los productos añadidos a la mesa
+     * @param numMesa Este parámetro indica el número de la mesa con la que se trabajará
+     */
+
+    public void resumenPedido (int numMesa) {
+        contadorProductos(numMesa);
+        imprimirContadorProductos();
+    }
+
+    /**
+     * Este método hace el recuento de los productos y los multiplica por su precio de unidad
      * @param numMesa Este parámetro indica el número de la mesa con la que se trabajará
      * @return Devuelve la suma total del precio de los productos de la mesa
      */
 
     public double cobrarMesa (int numMesa) {
-
-        contadorProductos(numMesa);
-
-        imprimirContadorProductos();
 
         double total = 0;
 
@@ -216,13 +223,11 @@ public class Cafeteria {
 
             caja += total;
         }
-
         return total;
     }
 
     /**
-     * Método que devuelve todos los productos que se ofrecen
-     * @return
+     * @return Devuélve todos los productos que se ofrecen
      */
 
     public List<Producto> getCarta() {

@@ -11,7 +11,7 @@
  * Estos métodos son métodos de impresión junto a una pequeña parte lógica, este tipo de métodos
  * ¿a que clase pertenecerían?, también he aplicado la forma de interfaz que usamos el año pasado
  * para uno de los ejercicios de Biblioteca en el que se imprime con un método y se recoge la respuesta con otro,
- * me interesaría saber si está correctamente aplicado ya que me gustaría aplicarlo a los futuros ejercicios,
+ * me interesaría saber si está correctamente aplicado ya que me gustaría usarlo para futuros ejercicios,
  * se podría aplicar en algun que otro lado pero no he querido hacerlo porque no sé como podría reaccionar
  * a la hora de que le paseis el test a los métodos, muchas gracias.
  */
@@ -38,6 +38,15 @@ public class VistaCafeteria {
     final static int OP_TERMINAR = 6;
 
     final static int NUMERO_MINIMO_MESAS_INICIALES = 1;
+
+    /**
+     * Método que imprime el total de la caja
+     */
+
+    public void totalCaja () {
+        System.out.print("Total: ");
+        System.out.print(cafeteria.getCaja() + " €");
+    }
 
     /**
      * Métodos para imprimir la mesa en la que vamos a añadir productos
@@ -88,37 +97,12 @@ public class VistaCafeteria {
                     cafeteria.addProducto(opcionMenu, numMesa);
                 }
             } while (opcionMenu != cafeteria.OP_TERMINAR_AÑADIR_PRODUCTO && opcionMenu != cafeteria.OP_BORRAR_CUENTA);
-            resumenPedido(numMesa);
+            cafeteria.resumenPedido(numMesa);
         }
     }
 
     /**
-     * Método que imprime el total de la caja
-     */
-
-    public void totalCaja () {
-        interfaz.mensajeTotalDeCaja();
-        System.out.print(cafeteria.getCaja() + " €");
-    }
-
-    /**
-     * Método que añade una nueva mesa
-     */
-
-    public void mesaNueva () {
-
-        String respuesta = interfaz.abrirMesa().toLowerCase();
-
-        if (respuesta.equals("s")) {
-            interfaz.mensajeMesaNuevaAbierta();
-            System.out.print(cafeteria.abrirMesa());
-        } else if (respuesta.equals("n")) {
-            interfaz.mensajeNoAbrirMesa();
-        } else interfaz.mensajeControlDeEntradaAbrirMesa();
-    }
-
-    /**
-     * Métodos para imprimir la mesa en la que vamos a añadir productos
+     * Métodos para imprimir la mesa en la que vamos a cobrar
      */
 
     public void imprimirSeleccionMesaACobrar () {
@@ -130,88 +114,55 @@ public class VistaCafeteria {
         return interfaz.leerRespuestaMenuCobrarMesa();
     }
 
-    public int imprimirEnseñarMesaACobrar (int accion) {
-        if (accion > cafeteria.getCountMesas()) {
-            interfaz.mensajeMesaNoExiste();
-        } else {
-            System.out.println("---------------------------------" +
-                    "\n             Mesa " + accion +
-                    "\n---------------------------------");
-        }
-        return accion;
-    }
-
     /**
      * Método para cobrar e imprimir la mesa
      */
 
     public void cuentaResumen () {
-        int numMesa = imprimirEnseñarMesaACobrar(menuSeleccionMesaACobrar());
+        int numMesa = menuSeleccionMesaACobrar();
 
         if (numMesa <= cafeteria.getCountMesas()) {
-            interfaz.mensajeCobroMesa();
-            System.out.print(cafeteria.cobrarMesa(numMesa));
-            System.out.print(" €");
-            cafeteria.borrarProductos(numMesa);
+
+            double total = cafeteria.cobrarMesa(numMesa);
+
+            if (total == 0.0) {
+                System.out.println("La mesa está vacía.");
+            } else {
+                System.out.println("---------------------------------" +
+                        "\n             Mesa " + numMesa +
+                        "\n---------------------------------");
+                System.out.println("Cuenta:\n");
+                cafeteria.resumenPedido(numMesa);
+                System.out.print(total);
+                System.out.print(" €");
+                cafeteria.borrarProductos(numMesa);
+            }
+
+        } else {
+            interfaz.mensajeMesaNoExiste();
         }
     }
 
     /**
-     * Este método cuenta e imprime los productos de la mesa que pidamos,
-     * este método se usa al finalizar de añadir los productos se imprime
-     * para mostrar el resumen de todos los productos añadidos a la mesa
-     * @param numMesa Este parámetro indica el número de la mesa con la que se trabajará
+     * Método que añade una nueva mesa
      */
 
-    public void resumenPedido (int numMesa) {
-        cafeteria.contadorProductos(numMesa);
-        cafeteria.imprimirContadorProductos();
+    public void mesaNueva () {
+
+        String respuesta = interfaz.abrirMesa().toLowerCase();
+
+        if (respuesta.equals("s")) {
+            System.out.print("Se ha abierto correctamente la mesa ");
+            System.out.print(cafeteria.abrirMesa());
+        } else if (respuesta.equals("n")) {
+            interfaz.mensajeNoAbrirMesa();
+        } else interfaz.mensajeControlDeEntradaAbrirMesa();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * Método que tiene la lógica del menú
+     * @param accion Este parámetro indica la acción a realizar
+     */
 
 
     public void programaPrincipal (int accion) {
@@ -236,13 +187,23 @@ public class VistaCafeteria {
 
     public static void main(String[] args) {
 
+        /**
+         * Instancias
+         */
+
         VistaCafeteria vistaCafeteria = new VistaCafeteria();
         Interfaz interfaz = new Interfaz();
         Cafeteria cafeteria = new Cafeteria();
 
+        /**
+         * Llamada al método para abrir las mesas iniciales
+         */
+
         cafeteria.abrirMesasIniciales(interfaz.menuNumeroMesasAbiertas());
 
-
+        /**
+         * Búcle del menú
+         */
 
         int accion = OP_NO_DEFINIDA;
 

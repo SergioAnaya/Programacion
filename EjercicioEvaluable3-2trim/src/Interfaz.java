@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Esta clase contiene lo relacionado a imprimir la interfaz
+ * Esta clase contiene lo relacionado a imprimir la interfaz y recoger respuestas
  */
 
 public class Interfaz {
@@ -73,46 +73,13 @@ public class Interfaz {
     }
 
     /**
-     * Método de mensaje de nueva mesa abierta
-     */
-
-    public void mensajeMesaNuevaAbierta () {
-        System.out.print("Se ha abierto correctamente la mesa ");
-    }
-
-    /**
-     * Método de mensaje de error
-     */
-
-    public void mensajeMesaNoExiste () {
-        System.out.println("Esa mesa no existe.");
-    }
-
-    /**
-     * Método de mensaje de para el total de la caja
-     */
-
-    public void mensajeTotalDeCaja () {
-        System.out.print("Total: ");
-    }
-
-    /**
-     * Mensaje de cobro de mesa
-     */
-
-    public void mensajeCobroMesa () {
-        System.out.println("Cuenta:\n");
-    }
-
-    /**
-     *
-     * @return
+     * Recoge la respuesta de la mesa que vamos a cobrar
      */
 
     public int leerRespuestaMenuCobrarMesa () { return teclado.nextInt(); }
 
     /**
-     *
+     * Métodos para imprimir si queremos abrir la mesa junto a los mensajes de control de error
      */
 
     public void mensajeAbrirMesa () {
@@ -134,5 +101,9 @@ public class Interfaz {
         System.out.println("Debes introducir la opción 's' o 'n'.");
     }
 
+    /**
+     * Método de mensaje de error
+     */
 
+    public void mensajeMesaNoExiste () { System.out.println("Esa mesa no existe."); }
 }
