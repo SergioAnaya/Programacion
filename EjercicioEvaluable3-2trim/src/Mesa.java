@@ -15,8 +15,6 @@ public class Mesa {
 
     List<Producto> productos = new LinkedList<>();
 
-    public Mesa () {}
-
     public Mesa(int identificadorMesa) {
         this.identificadorMesa = identificadorMesa;
     }
@@ -30,16 +28,8 @@ public class Mesa {
         return identificadorMesa;
     }
 
-    public void setIdentificadorMesa(int identificadorMesa) {
-        this.identificadorMesa = identificadorMesa;
-    }
-
     public List<Producto> getProductos() {
         return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
     }
 
     @Override
