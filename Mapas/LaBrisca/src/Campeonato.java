@@ -28,6 +28,7 @@ public class Campeonato {
             String [] jugador = linea.split(",");
             partidas.put(jugador[0], new Jugador(jugador[0], jugador[1], jugador[2], Integer.parseInt(jugador[3]), Integer.parseInt(jugador[4])));
         }
+        lectorF.close();
     }
 
     public void guardarDatos (String archivo) throws IOException {
@@ -36,6 +37,7 @@ public class Campeonato {
         for (String nickName : partidas.keySet()) {
             fichero.write(partidas.get(nickName)).toCSVLine();
         }
+        fichero.close();
     }
 
     public void anotarVictoria () {
