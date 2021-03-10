@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+<establecimientos>
+    <establecimiento nombre="Aitor Lasa Gaztategia" latitud="43.1367597714714" longitud="-2.07155868392898" ciudad="Tolosa">
+        <plato nombre="Alubias con sacramentos"/>
+        <plato nombre="Angulas al estilo tradicional"/>
+        <plato nombre="Bacalao a la vizcaína"/>
+    </establecimiento>
+    <establecimiento nombre="Altube" latitud="43.1447016126343" longitud="-2.08372883514191" ciudad="Tolosa">
+        <plato nombre="Bacalao a la vizcaína"/>
+        <plato nombre="Bacalao al Pil Pil"/>
+        <plato nombre="Bonito con Tomate"/>
+        <plato nombre="Caracoles"/>
+    </establecimiento>
+    <establecimiento nombre="Amona María" latitud="43.1395156312421" longitud="-2.07755103349607" ciudad="Tolosa">
+        <plato nombre="Alubias con sacramentos"/>
+        <plato nombre="Angulas al estilo tradicional"/>
+        <plato nombre="Bacalao a la vizcaína"/>
+        <plato nombre="Chuletillas al sarmiento"/>
+    </establecimiento>
+    <establecimiento nombre="Barriola Harategia" latitud="43.1459646709042" longitud="-2.08611225670253" ciudad="Tolosa">
+        <plato nombre="Alubias con sacramentos"/>
+        <plato nombre="Bacalao al Pil Pil"/>
+        <plato nombre="Bonito con Tomate"/>
+        <plato nombre="Caracoles"/>
+    </establecimiento>
+    <establecimiento nombre="Charcuteria Prost" latitud="43.1368507361066" longitud="-2.07766062150747" ciudad="Tolosa">
+        <plato nombre="Angulas al estilo tradicional"/>
+        <plato nombre="Bacalao al Pil Pil"/>
+        <plato nombre="Caracoles"/>
+    </establecimiento>
+    <establecimiento nombre="Chocolates de Mendaro-Saint Gerons" latitud="43.1337304305465" longitud="-2.08354317138217" ciudad="Tolosa">
+        <plato nombre="Alubias con sacramentos"/>
+        <plato nombre="Angulas al estilo tradicional"/>
+        <plato nombre="Caracoles"/>
+        <plato nombre="Chuletillas al sarmiento"/>
+    </establecimiento>
+    <establecimiento nombre="Conservas Artesanas Victofer" latitud="43.138208184927" longitud="-2.07696153764372" ciudad="Tolosa">
+        <plato nombre="Bacalao a la vizcaína"/>
+        <plato nombre="Bacalao al Pil Pil"/>
+        <plato nombre="Bonito con Tomate"/>
+        <plato nombre="Chuletillas al sarmiento"/>
+    </establecimiento>
+    <establecimiento nombre="Conservas Hondarribia" latitud="43.1313959798937" longitud="-2.08305802619632" ciudad="Tolosa">
+        <plato nombre="Alubias con sacramentos"/>
+        <plato nombre="Bacalao a la vizcaína"/>
+        <plato nombre="Bacalao al Pil Pil"/>
+        <plato nombre="Caracoles"/>
+    </establecimiento>
+    <establecimiento nombre="Delicatessen La Blanca" latitud="43.1325280823996" longitud="-2.07055247812414" ciudad="Tolosa">
+        <plato nombre="Chuletillas al sarmiento"/>
+        <plato nombre="Bacalao al Pil Pil"/>
+        <plato nombre="Bonito con Tomate"/>
+        <plato nombre="Alubias con sacramentos"/>
+        <plato nombre="Angulas al estilo tradicional"/>
+    </establecimiento>
+    <establecimiento nombre="Divino" latitud="43.1292055747298" longitud="-2.07399509444835" ciudad="Tolosa">
+        <plato nombre="Angulas al estilo tradicional"/>
+        <plato nombre="Bacalao a la vizcaína"/>
+        <plato nombre="Bonito con Tomate"/>
+        <plato nombre="Caracoles"/>
+    </establecimiento>
+    <establecimiento nombre="Done Pedro" latitud="43.1351059875502" longitud="-2.07957201502999" ciudad="Tolosa">
+        <plato nombre="Caracoles"/>
+        <plato nombre="Chuletillas al sarmiento"/>
+        <plato nombre="Bacalao a la vizcaína"/>
+        <plato nombre="Bacalao al Pil Pil"/>
+        <plato nombre="Alubias con sacramentos"/>
+    </establecimiento>
+    <establecimiento nombre="Exclusivas Rioja Alavesa" latitud="43.13456612647" longitud="-2.08030045604068" ciudad="Tolosa">
+        <plato nombre="Bacalao a la vizcaína"/>
+        <plato nombre="Bacalao al Pil Pil"/>
+        <plato nombre="Bonito con Tomate"/>
+        <plato nombre="Chuletillas al sarmiento"/>
+    </establecimiento>
+    <establecimiento nombre="Exquissitum Gourmet" latitud="43.1314146105209" longitud="-2.07409210021279" ciudad="Tolosa">
+        <plato nombre="Bacalao a la vizcaína"/>
+        <plato nombre="Bacalao al Pil Pil"/>
+        <plato nombre="Bonito con Tomate"/>
+        <plato nombre="Caracoles"/>
+    </establecimiento>
+    <establecimiento nombre="Gazi Gozo" latitud="43.1384551333509" longitud="-2.07821776859066" ciudad="Tolosa">
+        <plato nombre="Alubias con sacramentos"/>
+        <plato nombre="Angulas al estilo tradicional"/>
+        <plato nombre="Bacalao a la vizcaína"/>
+    </establecimiento>
+    <establecimiento nombre="Getaka" latitud="43.3032068321472" longitud="-1.94952699234622" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Marmitako"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="Goñi Ardoteka" latitud="43.31733360932" longitud="-1.96697992653462" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="Idoia Ardotegia" latitud="43.3086076187851" longitud="-1.97262652254564" ciudad="San Sebastián">
+        <plato nombre="Intxaursaltsa"/>
+        <plato nombre="Marmitako"/>
+        <plato nombre="Merluza en salsa verde"/>
+    </establecimiento>
+    <establecimiento nombre="Hermanos Fernández Terreros" latitud="43.288027565418" longitud="-1.96473455798023" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Goxua"/>
+        <plato nombre="Marmitako"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="La Catedral de la Cerveza" latitud="43.3075845965147" longitud="-1.9902960952541" ciudad="San Sebastián">
+        <plato nombre="Goxua"/>
+        <plato nombre="Intxaursaltsa"/>
+        <plato nombre="Marmitako"/>
+        <plato nombre="Merluza en salsa verde"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="Kixkurgune" latitud="43.3037504983598" longitud="-1.97628181462466" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Goxua"/>
+        <plato nombre="Intxaursaltsa"/>
+        <plato nombre="Merluza en salsa verde"/>
+    </establecimiento>
+    <establecimiento nombre="La Granja Selección" latitud="43.3092794820376" longitud="-1.95865947905409" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Goxua"/>
+        <plato nombre="Intxaursaltsa"/>
+        <plato nombre="Marmitako"/>
+        <plato nombre="Merluza en salsa verde"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="La Despensa de la Abuela" latitud="43.3209135355736" longitud="-2.0079842146223" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Goxua"/>
+        <plato nombre="Merluza en salsa verde"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="MAISOR" latitud="43.2932098169755" longitud="-1.9828339618147" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Goxua"/>
+        <plato nombre="Intxaursaltsa"/>
+        <plato nombre="Marmitako"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="Lur-Lan Bistrot" latitud="43.3191040219979" longitud="-1.94968814426468" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Intxaursaltsa"/>
+        <plato nombre="Merluza en salsa verde"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="Martin's Bodega" latitud="43.3110537496784" longitud="-2.01006104671374" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Goxua"/>
+        <plato nombre="Intxaursaltsa"/>
+        <plato nombre="Marmitako"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="Maritierra" latitud="43.3186041979467" longitud="-2.0071232922544" ciudad="San Sebastián">
+        <plato nombre="Marmitako"/>
+        <plato nombre="Merluza en salsa verde"/>
+        <plato nombre="Pastel Vasco"/>
+    </establecimiento>
+    <establecimiento nombre="Odriozola Ardoak" latitud="43.3030233349787" longitud="-1.96673375381687" ciudad="San Sebastián">
+        <plato nombre="Gilda"/>
+        <plato nombre="Goxua"/>
+        <plato nombre="Intxaursaltsa"/>
+    </establecimiento>
+    <establecimiento nombre="Muñagorri Harategia" latitud="43.2528726303475" longitud="-2.86669951881817" ciudad="Bilbao">
+        <plato nombre="Patatas con chorizo"/>
+        <plato nombre="Txipirones en su tinta"/>
+        <plato nombre="Txangurro"/>
+        <plato nombre="Zurrukutuna"/>
+    </establecimiento>
+    <establecimiento nombre="Ondarre Denda" latitud="43.2617716892404" longitud="-2.85123005439969" ciudad="Bilbao">
+        <plato nombre="Sukalki"/>
+        <plato nombre="Txipirones en su tinta"/>
+        <plato nombre="Txangurro"/>
+        <plato nombre="Zurrukutuna"/>
+    </establecimiento>
+    <establecimiento nombre="Olano" latitud="43.2551779457836" longitud="-2.85408526790982" ciudad="Bilbao">
+        <plato nombre="Patatas con chorizo"/>
+        <plato nombre="Sukalki"/>
+        <plato nombre="Txipirones en su tinta"/>
+    </establecimiento>
+    <establecimiento nombre="San Martin" latitud="43.2508041710336" longitud="-2.88483083319905" ciudad="Bilbao">
+        <plato nombre="Patatas con chorizo"/>
+        <plato nombre="Sukalki"/>
+        <plato nombre="Txangurro"/>
+        <plato nombre="Zurrukutuna"/>
+    </establecimiento>
+    <establecimiento nombre="Salanort" latitud="43.2495173108177" longitud="-2.88726520349486" ciudad="Bilbao">
+        <plato nombre="Patatas con chorizo"/>
+        <plato nombre="Sukalki"/>
+        <plato nombre="Txipirones en su tinta"/>
+        <plato nombre="Zurrukutuna"/>
+    </establecimiento>
+    <establecimiento nombre="Txokolateixia" latitud="43.2526434044306" longitud="-2.84313158730973" ciudad="Bilbao">
+        <plato nombre="Patatas con chorizo"/>
+        <plato nombre="Sukalki"/>
+        <plato nombre="Txipirones en su tinta"/>
+    </establecimiento>
+    <establecimiento nombre="Ugalde" latitud="43.2544068566647" longitud="-2.84099630807603" ciudad="Bilbao">
+        <plato nombre="Txipirones en su tinta"/>
+        <plato nombre="Txangurro"/>
+        <plato nombre="Zurrukutuna"/>
+    </establecimiento>
+    <establecimiento nombre="Toloño Selección" latitud="43.2534790861035" longitud="-2.83570138514671" ciudad="Bilbao">
+        <plato nombre="Patatas con chorizo"/>
+        <plato nombre="Sukalki"/>
+        <plato nombre="Txipirones en su tinta"/>
+        <plato nombre="Txangurro"/>
+        <plato nombre="Zurrukutuna"/>
+    </establecimiento>
+    <establecimiento nombre="Txoko Sagarna" latitud="43.2527147133953" longitud="-2.86793416253544" ciudad="Bilbao">
+        <plato nombre="Patatas con chorizo"/>
+        <plato nombre="Sukalki"/>
+        <plato nombre="Txipirones en su tinta"/>
+        <plato nombre="Zurrukutuna"/>
+    </establecimiento>
+    <establecimiento nombre="Vinoteca Mendibil" latitud="43.2478608988314" longitud="-2.8737057889675" ciudad="Bilbao">
+        <plato nombre="Patatas con chorizo"/>
+        <plato nombre="Sukalki"/>
+        <plato nombre="Txangurro"/>
+        <plato nombre="Zurrukutuna"/>
+    </establecimiento>
+    <establecimiento nombre="Zerain Herriko Denda" latitud="43.2577734845432" longitud="-2.88070989334976" ciudad="Bilbao">
+        <plato nombre="Patatas con chorizo"/>
+        <plato nombre="Zurrukutuna"/>
+    </establecimiento>
+</establecimientos>-->
+<concesionario>
+    <coche id="1">
+        <marca>Renault</marca>
+        <modelo>Megane</modelo>
+        <cilindrada>1.5</cilindrada>
+    </coche>
+
+    <coche id="2">
+        <marca>Seat</marca>
+        <modelo>León</modelo>
+        <cilindrada>1.6</cilindrada>
+    </coche>
+
+    <coche id="3">
+        <marca>Suzuki</marca>
+        <modelo>Vitara</modelo>
+        <cilindrada>1.9</cilindrada>
+    </coche>
+</concesionario>
