@@ -35,7 +35,7 @@ public class Campeonato {
         FileWriter fichero = new FileWriter(nombreArchivo);
 
         for (String nickName : partidas.keySet()) {
-            fichero.write(partidas.get(nickName)).toCSVLine();
+            fichero.write(String.valueOf(partidas.get(nickName)));
         }
         fichero.close();
     }
@@ -69,5 +69,4 @@ public class Campeonato {
         }
         return partidas.get(ganador);
     }
-
 }

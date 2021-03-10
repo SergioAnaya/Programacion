@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<company>
+    <staff>
+        <name>john</name>
+        <phone>465456433</phone>
+        <email>gmail1</email>
+        <area>area1</area>
+        <city>city1</city>
+    </staff>
+    <staff>
+        <name>mary</name>
+        <phone>4655556433</phone>
+        <email>gmail2</email>
+        <area>area2</area>
+        <city>city2</city>
+    </staff>
+    <staff>
+        <name>furvi</name>
+        <phone>4655433</phone>
+        <email>gmail3</email>
+        <area>area3</area>
+        <city>city3</city>
+
+    </staff>
+</company>

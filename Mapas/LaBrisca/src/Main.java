@@ -7,13 +7,13 @@ public class Main {
         campeonato.leerArchivo("Jugadores.csv");
         System.out.println(campeonato.partidas.toString());
 
-        campeonato.anotarResultado("jesfly");
-        campeonato.anotarResultado("harry");
-        campeonato.anotarResultado("jesfly");
-        campeonato.anotarResultado("jesfly");
+        campeonato.anotarResultado("Jesfly");
+        campeonato.anotarResultado("Harry");
+        campeonato.anotarResultado("Jesfly");
+        campeonato.anotarResultado("Jesfly");
         campeonato.anotarResultado("Peter");
-        campeonato.anotarResultado("jesfly");
-        campeonato.anotarResultado("jesfly");
+        campeonato.anotarResultado("Jesfly");
+        campeonato.anotarResultado("Jesfly");
 
         System.out.println("Partidas juadas hasta el momento = " + campeonato.partidasTotales());
 
@@ -22,5 +22,4 @@ public class Main {
         campeonato.guardarDatos(campeonato.nombreArchivo);
 
     }
-
 }

@@ -1,3 +1,18 @@
-Jesfly,Jesus,Garcia,23,0
-Harry,Martin,Fernandez,26,0
-Peter,Pedro,Lama,30,0
+
+NickName: Jesfly
+Nombre: Jesus
+Apellidos: Garcia
+Edad: 23
+PartidasGanadas: 5
+
+NickName: Harry
+Nombre: Martin
+Apellidos: Fernandez
+Edad: 26
+PartidasGanadas: 1
+
+NickName: Peter
+Nombre: Pedro
+Apellidos: Lama
+Edad: 30
+PartidasGanadas: 1

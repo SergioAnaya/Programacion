@@ -36,8 +36,4 @@ public class Jugador {
                 "\nPartidasGanadas: " + partidasGanadas +
                 "\n";
     }
-
-    public String toCSVLine() {
-        return nickName + ',' + nombre + ',' + apellidos + ',' + edad + "," + partidasGanadas + "\n";
-    }
 }
