@@ -1,0 +1,14 @@
+<empleados>
+    <empleado id="1" nombre="Carlos" apellidos="García González"
+              tipo="comisionado" extra="50" ventas="5"/>
+    <empleado id="2" nombre="Ana" apellidos="Gutierrez Donate"
+              tipo="comisionado" extra="80" ventas="10"/>
+    <empleado id="3" nombre="Pedro" apellidos="Antúnez López"
+              tipo="por_horas" horas="120"/>
+    <empleado id="4" nombre="Antonio" apellidos="Oloriz Betelli"
+              tipo="por_horas" horas="100"/>
+    <empleado id="5" nombre="Beatriz" apellidos="Txintxurreta Zabala"
+              tipo="asalariado"/>
+    <empleado id="6" nombre="Roberto" apellidos="Santiago Heredia"
+              tipo="asalariado"/>
+</empleados>
