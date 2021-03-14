@@ -83,7 +83,7 @@ public class LectorEmpleados {
     }
 
     /**
-     * Este método se usa para leer la estructura de cada empleado
+     * Este método se usa para definir la estructura que se va a leer de cada empleado
      */
 
     private Empleado getEmpleadoFromNodo (Node nodoEmpleado) {
