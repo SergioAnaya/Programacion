@@ -9,26 +9,6 @@ import java.util.*;
 
 public class Nomina {
 
-    /*LectorEmpleados lectorEmpleados = new LectorEmpleados("empleados.xml");
-    SueldoBase leerSueldoBase = new SueldoBase("sueldo_base.csv");
-
-    public void leerXML () {
-        System.out.println(lectorEmpleados.read().toString().replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(",", ""));
-    }
-
-    public void leerCSV () {
-        System.out.println(leerSueldoBase.read());
-    }
-
-    public static void main(String[] args) {
-
-        Nomina nomina = new Nomina();
-
-        nomina.leerXML();
-        nomina.leerCSV();
-
-    }*/
-
     /**
      * Constantes
      */
@@ -65,7 +45,7 @@ public class Nomina {
 
         asignarSueldoBase(sueldosBase, listaEmpleados);
 
-        System.out.println(listaEmpleados);
+        //System.out.println(listaEmpleados);
     }
 
     public List<Empleado> getEmpleados () { return listaEmpleados; }
@@ -96,8 +76,6 @@ public class Nomina {
                 asignarSueldoBaseAEmpleado(empleado, sueldo);
             }
         }
-
-        throw new NoSuchElementException ("No se encuentra el empleado");
     }
 
     /**
@@ -110,7 +88,7 @@ public class Nomina {
     }
 
     /**
-     *
+     * Método para mostrar el empleado que más cobra y el que menos
      */
 
     public Empleado getEmpleadoMejorPagado () {
