@@ -10,6 +10,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\Modelo\Comisionado.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\Modelo\Empleado.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\Modelo\PorHoras.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\RepasoExamen\Comisionado.java">
           <value>
             <Attribute>
