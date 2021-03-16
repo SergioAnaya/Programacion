@@ -1,0 +1,12 @@
+<vendedores>
+    <vendedor id="1" nombre="Juan" apellidos="Prieto Gutierrez">
+        <venta matricula="MA-4627-CS"/>
+        <venta matricula="0254-KWT"/>
+    </vendedor>
+    <vendedor id="2" nombre="Carlos" apellidos="González Tellez">
+        <venta matricula="1501-HLK"/>
+    </vendedor>
+    <vendedor id="3" nombre="Ana" apellidos="Páez Flores">
+        <venta matricula="8915-HOD"/>
+    </vendedor>
+</vendedores>
