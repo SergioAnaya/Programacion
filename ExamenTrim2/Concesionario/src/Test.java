@@ -10,7 +10,7 @@ public class Test {
 
         //System.out.println(concesionario.getVendedores());
 
-        //System.out.println(concesionario.getVehiculos());
+        System.out.println(concesionario.getVehiculos());
 
         //System.out.println(concesionario.getVehiculosVendidos());
 
@@ -23,7 +23,7 @@ public class Test {
 
         //System.out.println(concesionario.getVentasPorVendedor(vendedor));
 
-        System.out.println(concesionario.getMaximoVendedor());
+        //System.out.println(concesionario.getMaximoVendedor());
 
     }
 
