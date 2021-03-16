@@ -54,7 +54,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/EXAMEN/TurismoCulinario" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ExamenTrim2/Concesionario" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -98,10 +98,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/1920.52.1459.789/0.0.1920.1040@0.0.1920.1040" timestamp="1615489816263" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1615543371565">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1615899429133">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/1920.52.1459.789/0.0.1920.1040@0.0.1920.1040" timestamp="1615543371565" />
+    <state x="740" y="275" key="FileChooserDialogImpl/1920.52.1459.789/0.0.1920.1040@0.0.1920.1040" timestamp="1615899429133" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1615494640786">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
