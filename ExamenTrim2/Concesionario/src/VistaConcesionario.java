@@ -1,12 +1,9 @@
-/*
 
 import java.util.Scanner;
 
-*/
 /**
  * @author Sergio Anaya Marin
- *//*
-
+ */
 
 
 
@@ -149,4 +146,3 @@ public class VistaConcesionario {
     }
 
 }
-*/
