@@ -51,4 +51,15 @@ public class Paciente {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", genero='" + genero + '\'' +
+                ", edad=" + edad +
+                "\n";
+    }
 }

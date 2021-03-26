@@ -21,10 +21,10 @@ public class DBConnection {
 
     private Connection conn;
 
-    private static String db = "Secretaria"; // Nombre base de datos
+    private static String db = "Hospital"; // Nombre base de datos
     private static String login = "sergio"; // Nombre usuario de la base de datos
     private static String password = "sergio"; // // Contraseña de usuario de la base de datos
-    private static String url = "jdbc:mysql://192.168.0.218:3306/" + db + "?useSSL=false";
+    private static String url = "jdbc:mysql://192.168.0.216:3306/" + db + "?useSSL=false";
     private ResultSet resultSet;
 
     public DBConnection () {
