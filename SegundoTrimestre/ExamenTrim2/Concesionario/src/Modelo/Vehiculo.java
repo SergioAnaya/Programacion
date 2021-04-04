@@ -2,9 +2,11 @@ package Modelo;
 
 public class Vehiculo {
 
-    private String marca, modelo, km, matricula, precio;
+    private String marca, modelo, matricula;
+    private int km;
+    private Double precio;
 
-    public Vehiculo(String marca, String modelo, String km, String matricula, String precio) {
+    public Vehiculo(String marca, String modelo, int km, String matricula, Double precio) {
         this.marca = marca;
         this.modelo = modelo;
         this.km = km;
@@ -28,11 +30,11 @@ public class Vehiculo {
         this.modelo = modelo;
     }
 
-    public String getKm() {
+    public int getKm() {
         return km;
     }
 
-    public void setKm(String km) {
+    public void setKm(int km) {
         this.km = km;
     }
 
@@ -44,11 +46,11 @@ public class Vehiculo {
         this.matricula = matricula;
     }
 
-    public String getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
@@ -60,6 +62,6 @@ public class Vehiculo {
                 ", km='" + km + '\'' +
                 ", matricula='" + matricula + '\'' +
                 ", precio='" + precio + '\'' +
-                '}';
+                "\n";
     }
 }

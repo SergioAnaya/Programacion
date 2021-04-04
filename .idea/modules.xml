@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SegundoTrimestre/UsoFicheros/CSVComplejo/CSVComplejo.iml" filepath="$PROJECT_DIR$/SegundoTrimestre/UsoFicheros/CSVComplejo/CSVComplejo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TercerTrimestre/BaseDeDatos/Hospital/Hospital.iml" filepath="$PROJECT_DIR$/TercerTrimestre/BaseDeDatos/Hospital/Hospital.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Programacion.iml" filepath="$PROJECT_DIR$/.idea/Programacion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TercerTrimestre/BaseDeDatos/PruebaJDBC/PruebaJDBC.iml" filepath="$PROJECT_DIR$/TercerTrimestre/BaseDeDatos/PruebaJDBC/PruebaJDBC.iml" />
+    </modules>
+  </component>
+</project>

@@ -28,12 +28,21 @@ public class LectorVendedores {
      */
 
     private Document doc;
+    private List<Vendedor> listaVendedores;
+    private HashMap<Vendedor, List<String>> mapaVentas;
 
     /**
      * Constructor
      */
 
     public LectorVendedores (String nombreArchivo) {
+
+        /**
+         * Se inicializan las listas
+         */
+
+        listaVendedores = new LinkedList<Vendedor>();
+        mapaVentas = new HashMap<Vendedor, List<String>>();
 
         String dir = System.getProperty("user.dir");
 
@@ -44,6 +53,27 @@ public class LectorVendedores {
             doc = dBuilder.parse(inputFile);
 
             doc.getDocumentElement().normalize();
+
+            /**
+             * Se crea una lista de nodos de Vendedores (sin XPath)
+             */
+
+            NodeList listaVendedores = doc.getElementsByTagName("vendedor");
+
+            /**
+             * Se crea una lista de nodos de Vendedores (con XPath)
+             */
+
+            /*XPath xPath = XPathFactory.newInstance().newXPath();
+            String xPathString = "/vendedores/vendedor";
+
+            NodeList nl = (NodeList) xPath.compile(xPathString).evaluate(doc, XPathConstants.NODESET);*/
+
+            /**
+             * Se llama al método que rellena las listas
+             */
+
+            fill(listaVendedores);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,37 +87,62 @@ public class LectorVendedores {
     }
 
     /**
-     * Método para leer el archivo
+     * Método que rellena la lista de vendedores y el mapa de ventas
      */
 
-    public List<Vendedor> read () {
+    private void fill (NodeList nlVendedores) {
 
-        List<Vendedor> listaVendedores = new LinkedList<>();
+        /**
+         * Se recorre la lista de nodos de los vendedores
+         */
 
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        String xPathString = "/vendedores/vendedor";
+        for (int i = 0; i < nlVendedores.getLength(); i++) {
 
-        try {
-            NodeList nl = (NodeList) xPath.compile(xPathString).evaluate(doc,
-                    XPathConstants.NODESET);
+            /**
+             * Se saca el nodo de CADA vendedor
+             */
 
-            for (int i = 0; i < nl.getLength(); i++) {
-                Vendedor vendedor = getVendedor(nl.item(i));
+            Node nodoVendedor = nlVendedores.item(i);
+
+            /**
+             * Si el vendedor es un nodo de tipo elemento lo añade a la lista vendedor
+             */
+
+            if (nodoVendedor.getNodeType() == Node.ELEMENT_NODE) {
+                Vendedor vendedor = getVendedor(nodoVendedor);
                 listaVendedores.add(vendedor);
+
+                /**
+                 * Si el nodo tiene hijos los añade al mapa de las ventas
+                 */
+
+                if (nodoVendedor.hasChildNodes()) {
+                    mapaVentas.put(vendedor, getMatriculasPorVendedor(nodoVendedor));
+                }
             }
-        } catch (XPathExpressionException e) {
-            e.printStackTrace();
         }
-        return listaVendedores;
     }
 
     /**
-     * Este método se usa para definir la estructura que se va a leer de cada vendedor
+     * Getters de las listas
+     */
+
+    public List<Vendedor> getListaVendedores() {
+        return listaVendedores;
+    }
+
+    public HashMap<Vendedor, List<String>> getMapaVentas() {
+        return mapaVentas;
+    }
+
+    /**
+     * Método para leer un vendedor
      */
 
     private Vendedor getVendedor (Node nodoVendedor) {
 
         Element elementoVendedor = (Element) nodoVendedor;
+        elementoVendedor.getElementsByTagName("vendedor");
 
         int id = Integer.parseInt(elementoVendedor.getAttribute("id"));
         String nombre = elementoVendedor.getAttribute("nombre");
@@ -97,45 +152,43 @@ public class LectorVendedores {
     }
 
     /**
-     * Método para crear mapa de id de empleado y matricula
+     * Método para crear una lista de las matriculas por vendedor
      */
 
-    public Map<String, Integer> mapaMatriculasVentas () {
-        Map<String, Integer> mapaMatriculasVentas = new HashMap<>();
+    private List<String> getMatriculasPorVendedor (Node nodoVendedor) {
 
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        String xPathString = "/vendedores/vendedor/venta";
+        List<String> listaMatriculas = new LinkedList<>();
 
-        try {
-            NodeList nl = (NodeList) xPath.compile(xPathString).evaluate(doc,
-                    XPathConstants.NODESET);
+        /**
+         * Se recorren todos los nodos hijos de cada Nodo VENDEDOR
+         */
 
-            for (int i = 0; i < nl.getLength(); i++) {
-                mapaMatriculasVentas.put(getMatricula(nl.item(i)), getId(nl.item(i).getParentNode()));
+        NodeList listaNodosHijos = nodoVendedor.getChildNodes();
+
+        /**
+         * Búcle para sacar todas las ventas de cada vendedor
+         */
+
+        for (int i = 0; i < listaNodosHijos.getLength(); i++) {
+
+            /**
+             * Vamos sacando cada venta con esta variable
+             */
+
+            Node nodoVenta = listaNodosHijos.item(i);
+
+            /**
+             * Si la venta es un nodo de tipo elemento lo añade a la lista
+             */
+
+            if (nodoVenta.getNodeType() == Node.ELEMENT_NODE) {
+                Element elementoVenta = (Element) nodoVenta;
+                elementoVenta.getElementsByTagName("venta");
+                String matricula = elementoVenta.getAttribute("matricula");
+                listaMatriculas.add(matricula);
+
             }
-
-        } catch (XPathExpressionException e) {
-            e.printStackTrace();
         }
-        return mapaMatriculasVentas;
+        return listaMatriculas;
     }
-
-    private int getId (Node nodoVendedor) {
-        Element elementoVendedor = (Element) nodoVendedor;
-
-        int id = Integer.parseInt(elementoVendedor.getAttribute("id"));
-
-        return id;
-    }
-
-    private String getMatricula (Node nodoVendedor) {
-
-        Element elementoVendedor = (Element) nodoVendedor;
-
-        return elementoVendedor.getAttribute("matricula");
-
-    }
-
-
-
 }

@@ -41,6 +41,6 @@ public class Vendedor {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
-                '}';
+                "\n";
     }
 }
