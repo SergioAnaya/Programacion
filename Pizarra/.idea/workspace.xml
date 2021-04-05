@@ -20,13 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3906ecab-be22-4e85-91fc-3b53ed80e51d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Concesionario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Concesionario.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pizarra/Coches.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pizarra/Coches.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pizarra/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pizarra/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pizarra/XML/EscribirXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pizarra/XML/EscribirXML.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pizarra/XML/LeerXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pizarra/XML/LeerXML.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SegundoTrimestre/ExamenTrim2/Concesionario/src/Persistencia/LectorVendedores.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SegundoTrimestre/ExamenTrim2/Concesionario/src/Persistencia/LectorVendedores.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1615487571060</updated>
       <workItem from="1617562611509" duration="11650000" />
+      <workItem from="1617630859743" duration="1206000" />
     </task>
     <servers />
   </component>

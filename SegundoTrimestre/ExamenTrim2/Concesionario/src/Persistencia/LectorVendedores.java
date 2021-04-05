@@ -16,10 +16,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LectorVendedores {
 
@@ -117,7 +114,7 @@ public class LectorVendedores {
                  */
 
                 if (nodoVendedor.hasChildNodes()) {
-                    mapaVentas.put(vendedor, getMatriculasPorVendedor(nodoVendedor));
+                    mapaVentas.put(vendedor, getMatriculas(nodoVendedor));
                 }
             }
         }
@@ -188,6 +185,26 @@ public class LectorVendedores {
                 listaMatriculas.add(matricula);
 
             }
+        }
+        return listaMatriculas;
+    }
+
+    private List<String> getMatriculas (Node nodoVendedor) {
+
+        List<String> listaMatriculas = new ArrayList<>();
+
+        NodeList nl = nodoVendedor.getChildNodes();
+
+        for (int i = 0; i < nl.getLength(); i++) {
+
+            Node nodoVenta = nl.item(i);
+
+            if (nodoVenta.getNodeType() == Node.ELEMENT_NODE) {
+                Element elementoMatricula = (Element) nodoVenta;
+                String matricula = elementoMatricula.getAttribute("matricula");
+                listaMatriculas.add(matricula);
+            }
+
         }
         return listaMatriculas;
     }
