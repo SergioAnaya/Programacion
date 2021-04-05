@@ -39,9 +39,9 @@ public class Coches {
     @Override
     public String toString() {
         return "Pizarra.Coches{" +
-                "marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", cilindrada='" + cilindrada + '\'' +
+                "marca='" + marca +
+                ", modelo='" + modelo +
+                ", cilindrada='" + cilindrada +
                 '}';
     }
 }

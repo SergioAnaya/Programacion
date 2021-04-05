@@ -18,30 +18,30 @@ import java.io.File;
 
 public class EscribirXML {
 
-    public void escribirXML (String nombreArchivo) {
+    /*public void escribirXML (String nombreArchivo) {
 
         Main main = new Main();
 
         try {
 
-            /**
+            *//**
              * Inicializamos el archivo
-             */
+             *//*
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
 
-            /**
+            *//**
              * Se define el elemento raíz del documento
-             */
+             *//*
 
             Element elementoRaiz = doc.createElement("concesionario");
             doc.appendChild(elementoRaiz);
 
-            /**
+            *//**
              * Se definen los nodos que contendrán los elementos
-             */
+             *//*
 
             Element elementoCoche = doc.createElement("coche");
             elementoRaiz.appendChild(elementoCoche);
@@ -49,9 +49,9 @@ public class EscribirXML {
             Element elementoCoche2 = doc.createElement("coche");
             elementoRaiz.appendChild(elementoCoche2);
 
-            /**
+            *//**
              * Se define un atributo para el nodo coche
-             */
+             *//*
 
             Attr atributoCoche = doc.createAttribute("id");
             atributoCoche.setValue("1");
@@ -61,9 +61,9 @@ public class EscribirXML {
             atributoCoche2.setValue("2");
             elementoCoche2.setAttributeNode(atributoCoche2);
 
-            /**
+            *//**
              * Se define cada uno de los elementos y se le asigna un valor
-             */
+             *//*
 
             Element elementoMarca = doc.createElement("marca");
             elementoMarca.appendChild(doc.createTextNode(main.getListaCoches().get(0).getMarca()));
@@ -89,9 +89,9 @@ public class EscribirXML {
             elementoCilindrada2.appendChild(doc.createTextNode("4.5"));
             elementoCoche2.appendChild(elementoCilindrada2);
 
-            /**
+            *//**
              * Se crea el archivo
-             */
+             *//*
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -107,5 +107,5 @@ public class EscribirXML {
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
