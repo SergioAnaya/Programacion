@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface DAO<Entidad, tipoDatos> {
 
-    void crear (Entidad paciente) throws SQLException;
-    void modificar (Entidad paciente) throws SQLException;
-    void eliminar (Entidad paciente) throws SQLException;
+    void crear (Entidad entidad) throws SQLException;
+    void modificar (Entidad entidad) throws SQLException;
+    void eliminar (Entidad entidad) throws SQLException;
     List<Entidad> obtenerTodos () throws SQLException;
-    Paciente obtener (tipoDatos id) throws SQLException;
+    Entidad obtener (tipoDatos id) throws SQLException;
 
 }
