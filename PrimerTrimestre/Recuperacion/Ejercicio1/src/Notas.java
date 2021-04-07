@@ -13,7 +13,7 @@ public class Notas {
     private final static int MEDIA_NOTAS = 3;
     private final static int OP_TERMINAR = 4;
 
-    private double notas[] = new double[99];
+    private double notas[] = new double[100];
     private int indice = 0;
 
     private void imprimirMenu () {
