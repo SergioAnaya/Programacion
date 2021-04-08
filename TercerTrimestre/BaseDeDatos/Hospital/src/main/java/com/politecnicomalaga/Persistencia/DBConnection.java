@@ -15,7 +15,8 @@ public class DBConnection {
     private static String db = "Hospital"; // Nombre base de datos
     private static String login = "sergio"; // Nombre usuario de la base de datos
     private static String password = "sergio"; // // Contraseña de usuario de la base de datos
-    private static String url = "jdbc:mysql://192.168.0.216:3306/" + db + "?useSSL=false";
+    private static String url = "jdbc:mysql://192.168.0.54:3306/" + db +
+            "?useSSL=false&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     /**
      * Constructor Vacío
@@ -41,12 +42,4 @@ public class DBConnection {
             conn.close();
         }
     }
-
-    public static void main(String[] args) throws SQLException {
-
-        DBConnection dbConnection = new DBConnection();
-        dbConnection.conectar();
-
-    }
-
 }

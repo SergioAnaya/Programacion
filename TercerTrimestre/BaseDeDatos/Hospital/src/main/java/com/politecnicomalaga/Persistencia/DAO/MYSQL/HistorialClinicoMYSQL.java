@@ -15,10 +15,10 @@ import java.util.List;
 public class HistorialClinicoMYSQL implements HistorialClinicoDAO {
 
     private final static String INSERT = "INSERT INTO HistorialClinico(Fecha, IdPaciente, IdMedico, Observacion) VALUES(?, ?, ?, ?)";
-    private final static String UPDATE = "UPDATE HistorialClinico SET Fecha = ?, IdPaciente = ?, IdMedico = ?, Observacion = ? WHERE Id = ?";
-    private final static String DELETE = "DELETE FROM HistorialClinico WHERE Id = ?";
+    private final static String UPDATE = "UPDATE HistorialClinico SET Fecha = ?, IdPaciente = ?, IdMedico = ?, Observacion = ? WHERE Cod = ?";
+    private final static String DELETE = "DELETE FROM HistorialClinico WHERE Cod = ?";
     private final static String GETALL = "SELECT Cod, Fecha, IdPaciente, IdMedico, Observacion FROM HistorialClinico";
-    private final static String GET = "SELECT Cod, Fecha, IdPaciente, IdMedico, Observacion FROM HistorialClinico WHERE Id = ?";
+    private final static String GET = "SELECT Cod, Fecha, IdPaciente, IdMedico, Observacion FROM HistorialClinico WHERE Cod = ?";
 
     DBConnection dbConnection = new DBConnection();
 
@@ -37,7 +37,7 @@ public class HistorialClinicoMYSQL implements HistorialClinicoDAO {
             statement.setString(1, historialClinico.getFecha());
             statement.setString(2, historialClinico.getIdPaciente());
             statement.setString(3, historialClinico.getIdMedico());
-            statement.setString(3, historialClinico.getObservacion());
+            statement.setString(4, historialClinico.getObservacion());
             if (statement.executeUpdate() == 0) {
                 throw new Exception("Puede que no se haya guardado.");
             }
@@ -64,6 +64,7 @@ public class HistorialClinicoMYSQL implements HistorialClinicoDAO {
             statement.setString(2, historialClinico.getIdPaciente());
             statement.setString(3, historialClinico.getIdMedico());
             statement.setString(4, historialClinico.getObservacion());
+            statement.setString(5, historialClinico.getCod());
             if (statement.executeUpdate() == 0) {
                 throw new Exception("Puede que no se haya guardado.");
             }
