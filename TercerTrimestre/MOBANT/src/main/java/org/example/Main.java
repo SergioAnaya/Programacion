@@ -16,15 +16,12 @@ public class Main {
          * CategoriaDAO
          */
 
-        //System.out.println(categoriaDAO.crear("Gama Prueba"));
-        /**
-         * Echarle un vistazo a los métodos para arreglar el control de errores
-         */
-        //System.out.println(categoriaDAO.actualizar("Gama EstándarPrueba", "Gama Estándar"));
-        //System.out.println(categoriaDAO.getCategoriaById(75));
-        //System.out.println(categoriaDAO.getId("Gama Económica"));
-        //System.out.println(categoriaDAO.borrar("Prueba"));
-        //System.out.println(categoriaDAO.exists("Gama Económica"));
+        //System.out.println(categoriaDAO.crear("Gama Alta"));
+        //System.out.println(categoriaDAO.actualizar("Gama Alta2", "Gama Alta"));
+        //System.out.println(categoriaDAO.getCategoriaById(84));
+        //System.out.println(categoriaDAO.getId("Gama Alta"));
+        //System.out.println(categoriaDAO.borrar("Gama Alta"));
+        //System.out.println(categoriaDAO.exists("Gama Alta"));
         //System.out.println(categoriaDAO.getAll());
 
         /**

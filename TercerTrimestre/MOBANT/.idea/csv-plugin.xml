@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\main\java\org\example\Modelo\ElementoModelo.java">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\main\java\org\example\Modelo\Modelo.java">
           <value>
             <Attribute>
@@ -24,7 +31,28 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\main\java\org\example\Modelo\Seccion.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\main\java\org\example\Modelo\TipoElemento.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\main\java\org\example\Persistencia\DAO\ModeloDAO.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\main\java\org\example\Persistencia\DAO\TipoElementoDAO.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />

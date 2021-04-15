@@ -1,6 +1,7 @@
 package org.example.Persistencia.DAO;
 
 import org.example.Modelo.Elemento;
+import org.example.Modelo.TipoElemento;
 import org.example.Persistencia.DBConnection;
 
 import java.sql.Connection;
@@ -18,7 +19,7 @@ public class ElementoDAO {
 
     private DBConnection dbConnection = new DBConnection();
     private Connection conn;
-    //private TipoElementoDAO tipoElementoDAO;
+    private TipoElementoDAO tipoElementoDAO;
 
     /**
      * Constantes
@@ -64,6 +65,7 @@ public class ElementoDAO {
             if (rs.next()) {
                 elemento.setId(rs.getString(1));
                 listaElementos.add(elemento);
+                tipoElementoDAO.crear(rs.getString(2));
             } else System.out.println("No se pudo asignar el ID a el Elemento");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -99,7 +101,7 @@ public class ElementoDAO {
     }
 
     /**
-     * Método para Obtener el ID del Elemento mediante su Código
+     * Método para Obtener el ID de un Elemento mediante su Código
      */
 
     public int getId (String codigo) throws SQLException {
@@ -147,7 +149,7 @@ public class ElementoDAO {
     }
 
     /**
-     * Método para Actualizar el Código del Elemento
+     * Método para Actualizar el Código de un Elemento
      */
 
     public boolean actualizar (String codigo, String nuevoCodigo) throws SQLException {

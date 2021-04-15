@@ -75,7 +75,7 @@ public class CategoriaDAO {
     }
 
     /**
-     * Método para Actualizar el Nombre de la Categoría
+     * Método para Actualizar el Nombre de una Categoría
      */
 
     public boolean actualizar (String categoria, String nuevoNombre) throws SQLException {
@@ -122,7 +122,7 @@ public class CategoriaDAO {
     }
 
     /**
-     * Método para Obtener el ID de la Categoría mediante su Nombre
+     * Método para Obtener el ID una Categoría mediante su Nombre
      */
 
     public int getId (String categoria) throws SQLException {
@@ -135,7 +135,7 @@ public class CategoriaDAO {
             rs = st.executeQuery();
             if (rs.next()) {
                 resultado = Integer.parseInt(rs.getString("id"));
-            } else System.out.println("No se ha encontrado el id de la Categoría");
+            } else System.out.println("No se ha encontrado el ID de la Categoría");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -172,10 +172,12 @@ public class CategoriaDAO {
      * Método para Comrpobar si existe una Categoría mediante su Nombre
      */
 
-    public boolean exists (String categoria) {
+    public boolean exists (String categoria) throws SQLException {
         boolean respuesta = false;
-        if (listaCategorias.contains(categoria)) {
-            respuesta = false;
+        for (String valor : getAll()) {
+            if (valor.equals(categoria)) {
+                respuesta = true;
+            }
         }
         return respuesta;
     }
@@ -196,6 +198,7 @@ public class CategoriaDAO {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            System.out.println("NULL");
         }
         if (rs != null || st != null) {
             dbConnection.desconectar();

@@ -1,6 +1,5 @@
 package org.example.Persistencia.DAO;
 
-import org.example.Modelo.Elemento;
 import org.example.Modelo.Modelo;
 import org.example.Persistencia.DBConnection;
 
@@ -30,12 +29,9 @@ public class ModeloDAO {
     private final static String UPDATE = "UPDATE modelo SET codigo = ? WHERE codigo = ?";
     private final static String DELETE = "DELETE FROM modelo WHERE codigo = ?";
     private final static String GET_BY_CODIGO = "SELECT id, codigo, id_seccion, id_categoria FROM modelo WHERE codigo = ?";
-    private final static String GET_BY_ID = "SELECT id, codigo, id_tipo_elemento FROM elemento WHERE id = ?";
-    private final static String GETALL = "SELECT id, codigo, id_tipo_elemento FROM elemento FROM modelo";
-
-    /**
-     * Variables
-     */
+    private final static String GET_BY_CATEGORIA = "SELECT id, codigo, id_tipo_elemento FROM modelo WHERE categoria = ?";
+    private final static String GET_BY_SECCION = "SELECT id, codigo, id_tipo_elemento FROM modelo WHERE seccion = ?";
+    private final static String GETALL = "SELECT id, codigo, id_tipo_elemento FROM modelo";
 
     /**
      * Constructor con Conexión a la Base de Datos
@@ -99,7 +95,7 @@ public class ModeloDAO {
     }
 
     /**
-     * Método para Obtener el ID del Modelo mediante su Código
+     * Método para Obtener el ID de un Modelo mediante su Código
      */
 
     public int getId (String codigo) throws SQLException {
@@ -123,7 +119,7 @@ public class ModeloDAO {
     }
 
     /**
-     * Método para Actualizar el Código del Modelo
+     * Método para Actualizar el Código de un Modelo
      */
 
     public boolean actualizar (String codigo, String nuevoCodigo) throws SQLException {
@@ -168,8 +164,7 @@ public class ModeloDAO {
     }
 
     /**
-     *
-     * @return
+     * Método para Obtener todos los Códigos de los Modelos
      */
 
     public List<String> getCodigosModelos () throws SQLException {
@@ -184,6 +179,7 @@ public class ModeloDAO {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            System.out.println("NULL");
         }
         if (rs != null || st != null) {
             dbConnection.desconectar();
@@ -192,25 +188,53 @@ public class ModeloDAO {
     }
 
     /**
-     *
-     * @param categoria
-     * @return
+     * Métodos para Obtener todos los Códigos de los Modelos mediante la Categoría
      */
 
-    public List<String> getCodigosModelosByCategoria (String categoria) {
-        List<String> lista = new ArrayList<>();
-        return lista;
+    public List<String> getCodigosModelosByCategoria (String categoria) throws SQLException {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<String> listaCodigos = new ArrayList<>();
+        try {
+            st = conn.prepareStatement(GET_BY_CATEGORIA);
+            st.setString(1, categoria);
+            rs = st.executeQuery();
+            while (rs.next()) {
+                listaCodigos.add(rs.getString("codigo"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            System.out.println("NULL");
+        }
+        if (rs != null || st != null) {
+            dbConnection.desconectar();
+        }
+        return listaCodigos;
     }
 
     /**
-     *
-     * @param seccion
-     * @return
+     * Métodos para Obtener todos los Códigos de los Modelos mediante la Sección
      */
 
-    public List<String> getCodigosModelosBySeccion (String seccion) {
-        List<String> lista = new ArrayList<>();
-        return lista;
+    public List<String> getCodigosModelosBySeccion (String seccion) throws SQLException {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<String> listaCodigos = new ArrayList<>();
+        try {
+            st = conn.prepareStatement(GET_BY_SECCION);
+            st.setString(1, seccion);
+            rs = st.executeQuery();
+            while (rs.next()) {
+                listaCodigos.add(rs.getString("codigo"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            System.out.println("NULL");
+        }
+        if (rs != null || st != null) {
+            dbConnection.desconectar();
+        }
+        return listaCodigos;
     }
 
     /**
