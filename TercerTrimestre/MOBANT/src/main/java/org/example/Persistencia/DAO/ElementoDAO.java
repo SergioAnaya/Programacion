@@ -1,7 +1,6 @@
 package org.example.Persistencia.DAO;
 
 import org.example.Modelo.Elemento;
-import org.example.Modelo.TipoElemento;
 import org.example.Persistencia.DBConnection;
 
 import java.sql.Connection;
@@ -25,24 +24,20 @@ public class ElementoDAO {
      * Constantes
      */
 
-    private final static String INSERT = "INSERT INTO elemento(codigo, id_tipo_elemento) VALUES(?, ?)";
+    private final static String INSERT = "INSERT INTO elemento(codigo, id_tipo_elemento) VALUES(?, (SELECT id FROM tipo_elemento WHERE id = ?))";
     private final static String UPDATE = "UPDATE elemento SET codigo = ? WHERE codigo = ?";
     private final static String DELETE = "DELETE FROM elemento WHERE codigo = ?";
     private final static String GET_BY_CODIGO = "SELECT id, codigo, id_tipo_elemento FROM elemento WHERE codigo = ?";
     private final static String GET_BY_ID = "SELECT id, codigo, id_tipo_elemento FROM elemento WHERE id = ?";
-
-    /**
-     * Variables
-     */
-
-    private List<Elemento> listaElementos;
+    private final static String GETALL = "SELECT id, codigo, id_tipo_elemento FROM elemento";
 
     /**
      * Constructor con Conexión a la Base de Datos
      */
 
-    public ElementoDAO () throws SQLException {
+    public ElementoDAO (Connection conn) throws SQLException {
         conn = dbConnection.conectar();
+        this.conn = conn;
     }
 
     /**
@@ -53,7 +48,6 @@ public class ElementoDAO {
         PreparedStatement st = null;
         ResultSet rs = null;
         boolean respuesta = false;
-        listaElementos = new ArrayList<>();
         try {
             st = conn.prepareStatement(INSERT, st.RETURN_GENERATED_KEYS);
             st.setString(1, elemento.getCodigo());
@@ -64,8 +58,6 @@ public class ElementoDAO {
             rs = st.getGeneratedKeys();
             if (rs.next()) {
                 elemento.setId(rs.getString(1));
-                listaElementos.add(elemento);
-                tipoElementoDAO.crear(rs.getString(2));
             } else System.out.println("No se pudo asignar el ID a el Elemento");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -107,7 +99,7 @@ public class ElementoDAO {
     public int getId (String codigo) throws SQLException {
         PreparedStatement st = null;
         ResultSet rs = null;
-        int resultado = 0;
+        int resultado = -1;
         try {
             st = conn.prepareStatement(GET_BY_CODIGO);
             st.setString(1, codigo);
@@ -131,12 +123,13 @@ public class ElementoDAO {
     public Elemento getElementoById (int id) throws SQLException {
         PreparedStatement st = null;
         ResultSet rs = null;
-        Elemento elemento = new Elemento();
+        Elemento elemento = null;
         try {
             st = conn.prepareStatement(GET_BY_ID);
             st.setString(1, String.valueOf(id));
             rs = st.executeQuery();
             if (rs.next()) {
+                elemento = new Elemento();
                 elemento = convertir(rs);
             } else System.out.println("Error al obtener el Elemento");
         } catch (SQLException throwables) {
@@ -194,10 +187,10 @@ public class ElementoDAO {
     }
 
     /**
-     * Método privado para Convertir a objetos los Elementos para su posterior uso
+     * Método para Convertir a objetos los Elementos para su posterior uso
      */
 
-    private Elemento convertir (ResultSet rs) throws SQLException {
+    public Elemento convertir (ResultSet rs) throws SQLException {
         String id = rs.getString("id");
         String codigo = rs.getString("codigo");
         String idTipoElemento = rs.getString("id_tipo_elemento");

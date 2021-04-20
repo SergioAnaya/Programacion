@@ -1,7 +1,5 @@
 package org.example.Persistencia.DAO;
 
-import org.example.Modelo.Categoria;
-import org.example.Modelo.Seccion;
 import org.example.Persistencia.DBConnection;
 
 import java.sql.Connection;
@@ -19,7 +17,6 @@ public class SeccionDAO {
 
     private DBConnection dbConnection = new DBConnection();
     private Connection conn;
-    private Seccion seccion = new Seccion();
 
     /**
      * Constantes
@@ -33,17 +30,12 @@ public class SeccionDAO {
     private final static String GET_BY_SECCION = "SELECT id, nombre FROM seccion WHERE nombre = ?";
 
     /**
-     * Variables
-     */
-
-    private List<String> listaSecciones;
-
-    /**
      * Constructor con Conexión a la Base de Datos
      */
 
-    public SeccionDAO () throws SQLException {
+    public SeccionDAO (Connection conn) throws SQLException {
         conn = dbConnection.conectar();
+        this.conn = conn;
     }
 
     /**
@@ -54,7 +46,6 @@ public class SeccionDAO {
         PreparedStatement st = null;
         ResultSet rs = null;
         boolean respuesta = false;
-        listaSecciones = new ArrayList<>();
         try {
             st = conn.prepareStatement(INSERT, st.RETURN_GENERATED_KEYS);
             st.setString(1, seccion);
@@ -62,10 +53,6 @@ public class SeccionDAO {
                 respuesta = true;
             }
             rs = st.getGeneratedKeys();
-            if (rs.next()) {
-                this.seccion.setId(rs.getString(1));
-                listaSecciones.add(seccion);
-            } else System.out.println("No se pudo asignar el ID a la Sección");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -79,10 +66,12 @@ public class SeccionDAO {
      * Método para Comrpobar si existe una Sección mediante su Nombre
      */
 
-    public boolean exists (String nombre) {
+    public boolean exists (String nombre) throws SQLException {
         boolean respuesta = false;
-        if (listaSecciones.contains(nombre)) {
-            respuesta = false;
+        for (String valor : getAll()) {
+            if (valor.equals(nombre)) {
+                respuesta = true;
+            }
         }
         return respuesta;
     }
@@ -140,7 +129,7 @@ public class SeccionDAO {
     public int getId (String seccion) throws SQLException {
         PreparedStatement st = null;
         ResultSet rs = null;
-        int resultado = 0;
+        int resultado = -1;
         try {
             st = conn.prepareStatement(GET_BY_SECCION);
             st.setString(1, seccion);
@@ -193,7 +182,7 @@ public class SeccionDAO {
             st = conn.prepareStatement(GETALL);
             rs = st.executeQuery();
             while (rs.next()) {
-                lista.add(convertir(rs));
+                lista.add(rs.getString("nombre"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -203,17 +192,5 @@ public class SeccionDAO {
             dbConnection.desconectar();
         }
         return lista;
-    }
-
-    /**
-     * Método privado para Convertir a objetos las Secciones para su posterior uso
-     */
-
-    private String convertir (ResultSet rs) throws SQLException {
-        String id = rs.getString("id");
-        String nombre = rs.getString("nombre");
-        Seccion seccion = new Seccion(nombre);
-        seccion.setId(id);
-        return seccion.getNombre();
     }
 }

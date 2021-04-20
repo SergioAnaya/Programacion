@@ -51,4 +51,13 @@ public class Elemento {
     public void setIdTipoElemento(String idTipoElemento) {
         this.idTipoElemento = idTipoElemento;
     }
+
+    @Override
+    public String toString() {
+        return "Elemento{" +
+                "id='" + id + '\'' +
+                ", codigo='" + codigo + '\'' +
+                ", idTipoElemento='" + idTipoElemento + '\'' +
+                "\n";
+    }
 }

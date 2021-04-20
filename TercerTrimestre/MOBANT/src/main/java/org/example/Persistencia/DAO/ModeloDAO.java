@@ -25,20 +25,21 @@ public class ModeloDAO {
      * Constantes
      */
 
-    private final static String INSERT = "INSERT INTO modelo(codigo, id_seccion, id_categoria) VALUES(?, ?, ?)";
+    private final static String INSERT = "INSERT INTO modelo(codigo, id_seccion, id_categoria) VALUES(?, (SELECT id FROM seccion WHERE id = ?), (SELECT id FROM categoria WHERE id = ?))";
     private final static String UPDATE = "UPDATE modelo SET codigo = ? WHERE codigo = ?";
     private final static String DELETE = "DELETE FROM modelo WHERE codigo = ?";
     private final static String GET_BY_CODIGO = "SELECT id, codigo, id_seccion, id_categoria FROM modelo WHERE codigo = ?";
     private final static String GET_BY_CATEGORIA = "SELECT id, codigo, id_tipo_elemento FROM modelo WHERE categoria = ?";
     private final static String GET_BY_SECCION = "SELECT id, codigo, id_tipo_elemento FROM modelo WHERE seccion = ?";
-    private final static String GETALL = "SELECT id, codigo, id_tipo_elemento FROM modelo";
+    private final static String GETALL = "SELECT id FROM modelo";
 
     /**
      * Constructor con Conexión a la Base de Datos
      */
 
-    public ModeloDAO () throws SQLException {
+    public ModeloDAO (Connection conn) throws SQLException {
         conn = dbConnection.conectar();
+        this.conn = conn;
     }
 
     /**
@@ -53,7 +54,7 @@ public class ModeloDAO {
             st = conn.prepareStatement(INSERT, st.RETURN_GENERATED_KEYS);
             st.setString(1, modelo.getCodigo());
             st.setString(2, modelo.getIdSeccion());
-            st.setString(3, modelo.getIdCategoria());
+            st.setString(3, modelo.getCodigo());
             if (st.executeUpdate() != 0) {
                 respuesta = true;
             }
@@ -101,7 +102,7 @@ public class ModeloDAO {
     public int getId (String codigo) throws SQLException {
         PreparedStatement st = null;
         ResultSet rs = null;
-        int resultado = 0;
+        int resultado = -1;
         try {
             st = conn.prepareStatement(GET_BY_CODIGO);
             st.setString(1, codigo);

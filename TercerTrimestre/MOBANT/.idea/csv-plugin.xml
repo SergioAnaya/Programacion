@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\main\java\org\example\Persistencia\DAO\ElementoDAO.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\main\java\org\example\Persistencia\DAO\ModeloDAO.java">
           <value>
             <Attribute>

@@ -1,6 +1,5 @@
 package org.example.Persistencia.DAO;
 
-import org.example.Modelo.Categoria;
 import org.example.Persistencia.DBConnection;
 
 import java.sql.Connection;
@@ -18,7 +17,6 @@ public class CategoriaDAO {
 
     private DBConnection dbConnection = new DBConnection();
     private Connection conn;
-    private Categoria categoria = new Categoria();
 
     /**
      * Constantes
@@ -28,21 +26,16 @@ public class CategoriaDAO {
     private final static String UPDATE = "UPDATE categoria SET nombre = ? WHERE nombre = ?";
     private final static String DELETE = "DELETE FROM categoria WHERE nombre = ?";
     private final static String GETALL = "SELECT id, nombre FROM categoria";
-    private final static String GET_BY_ID = "SELECT id, nombre FROM categoria WHERE id = ?";
-    private final static String GET_BY_NAME = "SELECT id, nombre FROM categoria WHERE nombre = ?";
-
-    /**
-     * Variables
-     */
-
-    private List<Categoria> listaCategorias;
+    private final static String GETALL_BY_ID = "SELECT nombre FROM categoria WHERE id = ?";
+    private final static String GETALL_BY_NAME = "SELECT id FROM categoria WHERE nombre = ?";
 
     /**
      * Constructor con Conexión a la Base de Datos
      */
 
-    public CategoriaDAO () throws SQLException {
+    public CategoriaDAO (Connection conn) throws SQLException {
         conn = dbConnection.conectar();
+        this.conn = conn;
     }
 
     /**
@@ -53,7 +46,6 @@ public class CategoriaDAO {
         PreparedStatement st = null;
         ResultSet rs = null;
         boolean respuesta = false;
-        listaCategorias = new ArrayList<>();
         try {
             st = conn.prepareStatement(INSERT, st.RETURN_GENERATED_KEYS);
             st.setString(1, categoria);
@@ -61,10 +53,6 @@ public class CategoriaDAO {
                 respuesta = true;
             }
             rs = st.getGeneratedKeys();
-            if (rs.next()) {
-                this.categoria.setId(rs.getString(1));
-                listaCategorias.add(this.categoria);
-            } else System.out.println("No se pudo asignar el ID a la Categoría");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -106,7 +94,7 @@ public class CategoriaDAO {
         ResultSet rs = null;
         String resultado = null;
         try {
-            st = conn.prepareStatement(GET_BY_ID);
+            st = conn.prepareStatement(GETALL_BY_ID);
             st.setString(1, String.valueOf(id));
             rs = st.executeQuery();
             if (rs.next()) {
@@ -128,9 +116,9 @@ public class CategoriaDAO {
     public int getId (String categoria) throws SQLException {
         PreparedStatement st = null;
         ResultSet rs = null;
-        int resultado = 0;
+        int resultado = -1;
         try {
-            st = conn.prepareStatement(GET_BY_NAME);
+            st = conn.prepareStatement(GETALL_BY_NAME);
             st.setString(1, categoria);
             rs = st.executeQuery();
             if (rs.next()) {
@@ -194,7 +182,7 @@ public class CategoriaDAO {
             st = conn.prepareStatement(GETALL);
             rs = st.executeQuery();
             while (rs.next()) {
-                lista.add(convertir(rs));
+                lista.add(rs.getString("nombre"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -204,17 +192,5 @@ public class CategoriaDAO {
             dbConnection.desconectar();
         }
         return lista;
-    }
-
-    /**
-     * Método privado para Convertir a objetos las Categorias para su posterior uso
-     */
-
-    private String convertir (ResultSet rs) throws SQLException {
-        String id = rs.getString("id");
-        String nombre = rs.getString("nombre");
-        Categoria categoria = new Categoria(nombre);
-        categoria.setId(id);
-        return categoria.getNombre();
     }
 }
