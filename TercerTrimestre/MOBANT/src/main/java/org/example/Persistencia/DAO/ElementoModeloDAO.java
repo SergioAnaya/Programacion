@@ -1,7 +1,7 @@
 package org.example.Persistencia.DAO;
 
 import org.example.Modelo.Elemento;
-import org.example.Persistencia.DBConnection;
+import org.example.Persistencia.DBConn;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class ElementoModeloDAO {
 
@@ -16,7 +17,6 @@ public class ElementoModeloDAO {
      * Instancias
      */
 
-    private DBConnection dbConnection = new DBConnection();
     private Connection conn;
     private ElementoDAO elementoDAO;
     private ModeloDAO modeloDAO;
@@ -25,49 +25,48 @@ public class ElementoModeloDAO {
      * Constantes
      */
 
-    private final static String INSERT = "INSERT INTO elemento_modelo(id_elemento, id_modelo) VALUES(?, ?)";
+    private final static String INSERT = "INSERT INTO elemento_modelo(id, id_elemento, id_modelo) VALUES(?, ?, ?)";
     private final static String UPDATE = "UPDATE elemento_modelo SET id_modelo = ? WHERE idElemento = ? AND id_modelo = ?";
     private final static String DELETE = "DELETE FROM elemento_modelo WHERE id_elemento = ? AND id_modelo = ?";
     private final static String GET_BY_ID = "SELECT id, id_elemento, id_modelo FROM elemento_modelo WHERE idElemento = ? AND id_modelo = ?";
     private final static String GET_BY_CODMODELO = "SELECT id, id_elemento, id_modelo FROM elemento_modelo WHERE id_modelo = ?";
-
-
-    /**
-     * Variables
-     */
 
     /**
      * Constructor con Conexión a la Base de Datos
      */
 
     public ElementoModeloDAO (Connection conn) throws SQLException {
-        conn = dbConnection.conectar();
         this.conn = conn;
+        elementoDAO = new ElementoDAO(conn);
+        modeloDAO = new ModeloDAO(conn);
     }
 
     /**
      * Método para Crear un nuevo ElementoModelo
      */
 
-    public boolean crear (String codigoElemento, String codigoModelo) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public boolean crear (String codigoElemento, String codigoModelo) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(INSERT, st.RETURN_GENERATED_KEYS);
-            st.setString(1, codigoElemento);
-            st.setString(2, codigoModelo);
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(INSERT);
+            statement.setString(1, null);
+            statement.setString(2, String.valueOf(getIdElemento(codigoElemento)));
+            statement.setString(3, String.valueOf(getIdModelo(codigoModelo)));
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
-            rs = st.getGeneratedKeys();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
+    }
+
+    private int getIdElemento (String elemento) {
+        return this.elementoDAO.getId(elemento);
+    }
+
+    private int getIdModelo (String modelo) {
+        return this.modeloDAO.getId(modelo);
     }
 
     /**
@@ -75,23 +74,18 @@ public class ElementoModeloDAO {
      * Código de Modelo
      */
 
-    public int getId (String codigoElemento, String codigoModelo) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public int getId (String codigoElemento, String codigoModelo) {
         int resultado = -1;
         try {
-            st = conn.prepareStatement(GET_BY_ID);
-            st.setString(1, codigoElemento);
-            st.setString(2, codigoModelo);
-            rs = st.executeQuery();
-            if (rs.next()) {
-                resultado = Integer.parseInt(rs.getString("id"));
-            } else System.out.println("Error al obtener el ID de ElementoModelo");
+            PreparedStatement statement = conn.prepareStatement(GET_BY_ID);
+            statement.setString(1, String.valueOf(getIdElemento(codigoElemento)));
+            statement.setString(2, String.valueOf(getIdModelo(codigoModelo)));
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                resultado = Integer.parseInt(resultSet.getString("id"));
+            }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return resultado;
         }
         return resultado;
     }
@@ -100,22 +94,18 @@ public class ElementoModeloDAO {
      * Método para Actualizar el Código del Modelo
      */
 
-    public boolean actualizarModelo (String codigoElemento, String codigoModelo, String codigoNuevoModelo) throws SQLException {
-        PreparedStatement st = null;
+    public boolean actualizarModelo (String codigoElemento, String codigoModelo, String codigoNuevoModelo) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(UPDATE);
-            st.setString(1, codigoNuevoModelo);
-            st.setString(2, codigoElemento);
-            st.setString(3, codigoModelo);
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(UPDATE);
+            statement.setString(1, codigoNuevoModelo);
+            statement.setString(2, String.valueOf(getIdElemento(codigoElemento)));
+            statement.setString(3, String.valueOf(getIdModelo(codigoModelo)));
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
     }
@@ -124,25 +114,19 @@ public class ElementoModeloDAO {
      * Método para Obtener todos los Elementos mediante el Código del Modelo
      */
 
-    public List<Elemento> getElementosByCodigoModelo (String codigoModelo) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        List<Elemento> listaCodigos = new ArrayList<>();
+    public List<Elemento> getElementosByCodigoModelo (String codigoModelo) {
+        List<Elemento> listaElementos = new ArrayList<>();
         try {
-            st = conn.prepareStatement(GET_BY_CODMODELO);
-            st.setString(1, codigoModelo);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                listaCodigos.add(elementoDAO.convertir(rs));
+            PreparedStatement statement = conn.prepareStatement(GET_BY_CODMODELO);
+            statement.setString(1, codigoModelo);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                listaElementos.add(elementoDAO.convertir(resultSet));
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            System.out.println("NULL");
+            return null;
         }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
-        }
-        return listaCodigos;
+        return listaElementos;
     }
 
     /**
@@ -150,22 +134,17 @@ public class ElementoModeloDAO {
      * Código de Modelo
      */
 
-    public boolean borrar (String codigoElemento, String codigoModelo) throws SQLException {
-        PreparedStatement st = null;
+    public boolean borrar (String codigoElemento, String codigoModelo) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(DELETE);
-            st.setString(1, codigoElemento);
-            st.setString(2, codigoModelo);
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(DELETE);
+            statement.setString(1, String.valueOf(getIdElemento(codigoElemento)));
+            statement.setString(2, String.valueOf(getIdModelo(codigoModelo)));
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
-            respuesta = true;
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
     }

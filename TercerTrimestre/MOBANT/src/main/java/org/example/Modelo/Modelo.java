@@ -1,41 +1,37 @@
 package org.example.Modelo;
 
+import java.util.List;
+
 public class Modelo {
 
     /**
      * Variables
      */
 
-    private String id, codigo, idSeccion, idCategoria;
+    private String codigo, seccion, categoria;
+    private List<Elemento> elementos;
 
-    /**
-     * Constructor Vacío
-     */
-
-    public Modelo() {
-    }
 
     /**
      * Constructor
      */
 
-    public Modelo(String codigo, String idSeccion, String idCategoria) {
+    public Modelo(String codigo, String seccion, String categoria) {
         this.codigo = codigo;
-        this.idSeccion = idSeccion;
-        this.idCategoria = idCategoria;
+        this.seccion = seccion;
+        this.categoria = categoria;
+    }
+
+    public Modelo(String codigo, String seccion, String categoria, List<Elemento> elementos) {
+        this.codigo = codigo;
+        this.seccion = seccion;
+        this.categoria = categoria;
+        this.elementos = elementos;
     }
 
     /**
      * Getters y Setter
      */
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getCodigo() {
         return codigo;
@@ -45,29 +41,29 @@ public class Modelo {
         this.codigo = codigo;
     }
 
-    public String getIdSeccion() {
-        return idSeccion;
+    public String getSeccion() {
+        return seccion;
     }
 
-    public void setIdSeccion(String idSeccion) {
-        this.idSeccion = idSeccion;
+    public void setSeccion(String idSeccion) {
+        this.seccion = idSeccion;
     }
 
-    public String getIdCategoria() {
-        return idCategoria;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setIdCategoria(String idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategoria(String idCategoria) {
+        this.categoria = idCategoria;
     }
 
     @Override
     public String toString() {
         return "Modelo{" +
-                "id='" + id + '\'' +
                 ", codigo='" + codigo + '\'' +
-                ", idSeccion='" + idSeccion + '\'' +
-                ", idCategoria='" + idCategoria + '\'' +
-                "\n";
+                ", seccion='" + seccion + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", elementos=" + elementos +
+                '}';
     }
 }

@@ -6,35 +6,20 @@ public class Elemento {
      * Variables
      */
 
-    private String id, codigo, idTipoElemento;
-
-    /**
-     * Constructor Vacío
-     */
-
-    public Elemento() {
-    }
+    private String codigo, tipo;
 
     /**
      * Constructor
      */
 
-    public Elemento(String codigo, String idTipoElemento) {
+    public Elemento(String tipo, String codigo) {
         this.codigo = codigo;
-        this.idTipoElemento = idTipoElemento;
+        this.tipo = tipo;
     }
 
     /**
      * Getters y Setters
      */
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getCodigo() {
         return codigo;
@@ -44,20 +29,19 @@ public class Elemento {
         this.codigo = codigo;
     }
 
-    public String getIdTipoElemento() {
-        return idTipoElemento;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setIdTipoElemento(String idTipoElemento) {
-        this.idTipoElemento = idTipoElemento;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @Override
     public String toString() {
         return "Elemento{" +
-                "id='" + id + '\'' +
-                ", codigo='" + codigo + '\'' +
-                ", idTipoElemento='" + idTipoElemento + '\'' +
-                "\n";
+                "codigo='" + codigo + '\'' +
+                ", tipo='" + tipo + '\'' +
+                '}';
     }
 }

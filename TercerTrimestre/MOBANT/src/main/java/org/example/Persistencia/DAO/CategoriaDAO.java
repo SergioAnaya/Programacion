@@ -1,7 +1,5 @@
 package org.example.Persistencia.DAO;
 
-import org.example.Persistencia.DBConnection;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +13,6 @@ public class CategoriaDAO {
      * Instancias
      */
 
-    private DBConnection dbConnection = new DBConnection();
     private Connection conn;
 
     /**
@@ -33,8 +30,7 @@ public class CategoriaDAO {
      * Constructor con Conexión a la Base de Datos
      */
 
-    public CategoriaDAO (Connection conn) throws SQLException {
-        conn = dbConnection.conectar();
+    public CategoriaDAO (Connection conn) {
         this.conn = conn;
     }
 
@@ -42,22 +38,16 @@ public class CategoriaDAO {
      * Método para Crear una nueva Categoría
      */
 
-    public boolean crear (String categoria) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public boolean crear (String categoria) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(INSERT, st.RETURN_GENERATED_KEYS);
-            st.setString(1, categoria);
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(INSERT);
+            statement.setString(1, categoria);
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
-            rs = st.getGeneratedKeys();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
     }
@@ -66,21 +56,17 @@ public class CategoriaDAO {
      * Método para Actualizar el Nombre de una Categoría
      */
 
-    public boolean actualizar (String categoria, String nuevoNombre) throws SQLException {
-        PreparedStatement st = null;
+    public boolean actualizar (String categoria, String nuevoNombre) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(UPDATE);
-            st.setString(1, nuevoNombre);
-            st.setString(2, categoria);
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(UPDATE);
+            statement.setString(1, nuevoNombre);
+            statement.setString(2, categoria);
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
     }
@@ -89,22 +75,17 @@ public class CategoriaDAO {
      * Método para Obtener el Nombre de una Categoría mediante su ID
      */
 
-    public String getCategoriaById (int id) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public String getCategoriaById (int id) {
         String resultado = null;
         try {
-            st = conn.prepareStatement(GETALL_BY_ID);
-            st.setString(1, String.valueOf(id));
-            rs = st.executeQuery();
-            if (rs.next()) {
-                resultado = rs.getString("nombre");
-            } else System.out.println("No se ha encontrado el nombre de la Categoría");
+            PreparedStatement statement = conn.prepareStatement(GETALL_BY_ID);
+            statement.setString(1, String.valueOf(id));
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                resultado = resultSet.getString("nombre");
+            }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return resultado;
         }
         return resultado;
     }
@@ -113,22 +94,17 @@ public class CategoriaDAO {
      * Método para Obtener el ID una Categoría mediante su Nombre
      */
 
-    public int getId (String categoria) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public int getId (String categoria) {
         int resultado = -1;
         try {
-            st = conn.prepareStatement(GETALL_BY_NAME);
-            st.setString(1, categoria);
-            rs = st.executeQuery();
-            if (rs.next()) {
-                resultado = Integer.parseInt(rs.getString("id"));
-            } else System.out.println("No se ha encontrado el ID de la Categoría");
+            PreparedStatement statement = conn.prepareStatement(GETALL_BY_NAME);
+            statement.setString(1, categoria);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                resultado = Integer.parseInt(resultSet.getString("id"));
+            }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return resultado;
         }
         return resultado;
     }
@@ -137,21 +113,16 @@ public class CategoriaDAO {
      * Método para Eliminar una Categoría mediante su Nombre
      */
 
-    public boolean borrar (String categoria) throws SQLException {
-        PreparedStatement st = null;
+    public boolean borrar (String categoria) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(DELETE);
-            st.setString(1, categoria);
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(DELETE);
+            statement.setString(1, categoria);
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
-            respuesta = true;
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
     }
@@ -160,7 +131,7 @@ public class CategoriaDAO {
      * Método para Comrpobar si existe una Categoría mediante su Nombre
      */
 
-    public boolean exists (String categoria) throws SQLException {
+    public boolean exists (String categoria) {
         boolean respuesta = false;
         for (String valor : getAll()) {
             if (valor.equals(categoria)) {
@@ -174,22 +145,16 @@ public class CategoriaDAO {
      * Método para Obtener todos los Nombres de las Categorias
      */
 
-    public List<String> getAll () throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public List<String> getAll () {
         List<String> lista = new ArrayList<String>();
         try {
-            st = conn.prepareStatement(GETALL);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                lista.add(rs.getString("nombre"));
+            PreparedStatement statement = conn.prepareStatement(GETALL);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                lista.add(resultSet.getString("nombre"));
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            System.out.println("NULL");
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return null;
         }
         return lista;
     }

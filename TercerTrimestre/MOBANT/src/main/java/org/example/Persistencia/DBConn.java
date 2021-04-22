@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnection {
+public class DBConn {
 
     /**
      * Variables
      */
 
-    private Connection conn;
+    private static Connection conn;
     private static String db = "mobant"; // Nombre de la Base de Datos
     private static String userLogin = "sergio"; // Nombre usuario de la Base de Datos
     private static String passLogin = "sergio"; // Contraseña del usuario
@@ -20,13 +20,13 @@ public class DBConnection {
      * Constructor Vacío
      */
 
-    public DBConnection () {}
+    public DBConn() {}
 
     /**
      * Método para Conectarse a la Base de Datos
      */
 
-    public Connection conectar () throws SQLException {
+    public static Connection conectar() throws SQLException {
         conn = DriverManager.getConnection(url, userLogin, passLogin);
         return conn;
     }
@@ -35,7 +35,7 @@ public class DBConnection {
      * Método para Desconectarse de la Base de Datos
      */
 
-    public void desconectar () throws SQLException {
+    public static void desconectar() throws SQLException {
         if (conn != null) {
             conn.close();
         }

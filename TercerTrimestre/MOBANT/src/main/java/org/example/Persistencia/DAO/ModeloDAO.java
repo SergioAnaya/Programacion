@@ -1,7 +1,6 @@
 package org.example.Persistencia.DAO;
 
 import org.example.Modelo.Modelo;
-import org.example.Persistencia.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +15,6 @@ public class ModeloDAO {
      * Instancias
      */
 
-    private DBConnection dbConnection = new DBConnection();
     private Connection conn;
     private SeccionDAO seccionDAO;
     private CategoriaDAO categoriaDAO;
@@ -25,72 +23,68 @@ public class ModeloDAO {
      * Constantes
      */
 
-    private final static String INSERT = "INSERT INTO modelo(codigo, id_seccion, id_categoria) VALUES(?, (SELECT id FROM seccion WHERE id = ?), (SELECT id FROM categoria WHERE id = ?))";
+    private final static String INSERT = "INSERT INTO modelo(id, codigo, id_seccion, id_categoria) VALUES(?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE modelo SET codigo = ? WHERE codigo = ?";
     private final static String DELETE = "DELETE FROM modelo WHERE codigo = ?";
     private final static String GET_BY_CODIGO = "SELECT id, codigo, id_seccion, id_categoria FROM modelo WHERE codigo = ?";
-    private final static String GET_BY_CATEGORIA = "SELECT id, codigo, id_tipo_elemento FROM modelo WHERE categoria = ?";
-    private final static String GET_BY_SECCION = "SELECT id, codigo, id_tipo_elemento FROM modelo WHERE seccion = ?";
-    private final static String GETALL = "SELECT id FROM modelo";
+    private final static String GET_BY_CATEGORIA = "SELECT id, codigo, id_seccion, id_categoria FROM modelo WHERE id_categoria = ?";
+    private final static String GET_BY_SECCION = "SELECT id, codigo, id_seccion, id_categoria FROM modelo WHERE id_seccion = ?";
+    private final static String GETALL = "SELECT id, codigo, id_seccion, id_categoria FROM modelo";
 
     /**
      * Constructor con Conexión a la Base de Datos
      */
 
-    public ModeloDAO (Connection conn) throws SQLException {
-        conn = dbConnection.conectar();
+    public ModeloDAO (Connection conn) {
         this.conn = conn;
+        seccionDAO = new SeccionDAO(conn);
+        categoriaDAO = new CategoriaDAO(conn);
     }
 
     /**
      * Método para Crear un nuevo Modelo
      */
 
-    public boolean Crear (Modelo modelo) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public boolean crear (Modelo modelo) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(INSERT, st.RETURN_GENERATED_KEYS);
-            st.setString(1, modelo.getCodigo());
-            st.setString(2, modelo.getIdSeccion());
-            st.setString(3, modelo.getCodigo());
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(INSERT);
+            statement.setString(1, null);
+            statement.setString(2, modelo.getCodigo());
+            statement.setString(3, String.valueOf(getIdSeccion(modelo.getSeccion())));
+            statement.setString(4, String.valueOf(getIdCategoria(modelo.getCategoria())));
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
-            rs = st.getGeneratedKeys();
-            if (rs.next()) {
-                modelo.setId(rs.getString(1));
-            } else System.out.println("No se pudo asignar el ID al Modelo");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
+    }
+
+    private int getIdSeccion (String seccion) {
+        return this.seccionDAO.getId(seccion);
+    }
+
+    private int getIdCategoria (String categoria) {
+        return this.categoriaDAO.getId(categoria);
     }
 
     /**
      * Método para Obtener un Modelo mediante su Código
      */
 
-    public Modelo leer (String codigo) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public Modelo leer (String codigo) {
         Modelo modelo = null;
         try {
-            st = conn.prepareStatement(GET_BY_CODIGO);
-            st.setString(1, codigo);
-            rs = st.executeQuery();
-            if (rs.next()) {
-                modelo = convertir(rs);
-            } else System.out.println("Error al obtener el Modelo");
+            PreparedStatement statement = conn.prepareStatement(GET_BY_CODIGO);
+            statement.setString(1, codigo);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                modelo = convertir(resultSet);
+            }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return modelo;
         }
         return modelo;
     }
@@ -99,22 +93,17 @@ public class ModeloDAO {
      * Método para Obtener el ID de un Modelo mediante su Código
      */
 
-    public int getId (String codigo) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public int getId (String codigo) {
         int resultado = -1;
         try {
-            st = conn.prepareStatement(GET_BY_CODIGO);
-            st.setString(1, codigo);
-            rs = st.executeQuery();
-            if (rs.next()) {
-                resultado = Integer.parseInt(rs.getString("id"));
-            } else System.out.println("Error al obtener el ID del Modelo");
+            PreparedStatement statement = conn.prepareStatement(GET_BY_CODIGO);
+            statement.setString(1, codigo);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                resultado = Integer.parseInt(resultSet.getString("id"));
+            }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return resultado;
         }
         return resultado;
     }
@@ -123,21 +112,17 @@ public class ModeloDAO {
      * Método para Actualizar el Código de un Modelo
      */
 
-    public boolean actualizar (String codigo, String nuevoCodigo) throws SQLException {
-        PreparedStatement st = null;
+    public boolean actualizar (String codigo, String nuevoCodigo) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(UPDATE);
-            st.setString(1, nuevoCodigo);
-            st.setString(2, codigo);
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(UPDATE);
+            statement.setString(1, nuevoCodigo);
+            statement.setString(2, codigo);
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
     }
@@ -146,44 +131,34 @@ public class ModeloDAO {
      * Método para Eliminar un Modelo mediante su Código
      */
 
-    public boolean borrar (String codigo) throws SQLException {
-        PreparedStatement st = null;
-        boolean resultado = false;
+    public boolean borrar (String codigo) {
+        boolean respuesta = false;
         try {
-            st = conn.prepareStatement(DELETE);
-            st.setString(1, codigo);
-            if (st.executeUpdate() != 0) {
-                resultado = true;
+            PreparedStatement statement = conn.prepareStatement(DELETE);
+            statement.setString(1, codigo);
+            if (statement.executeUpdate() != 0) {
+                respuesta = true;
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            return respuesta;
         }
-        if (st != null) {
-            dbConnection.desconectar();
-        }
-        return resultado;
+        return respuesta;
     }
 
     /**
      * Método para Obtener todos los Códigos de los Modelos
      */
 
-    public List<String> getCodigosModelos () throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public List<String> getCodigosModelos () {
         List<String> listaCodigos = new ArrayList<>();
         try {
-            st = conn.prepareStatement(GETALL);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                listaCodigos.add(rs.getString("codigo"));
+            PreparedStatement statement = conn.prepareStatement(GETALL);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                listaCodigos.add(resultSet.getString("codigo"));
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            System.out.println("NULL");
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return null;
         }
         return listaCodigos;
     }
@@ -192,23 +167,17 @@ public class ModeloDAO {
      * Métodos para Obtener todos los Códigos de los Modelos mediante la Categoría
      */
 
-    public List<String> getCodigosModelosByCategoria (String categoria) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public List<String> getCodigosModelosByCategoria (String categoria) {
         List<String> listaCodigos = new ArrayList<>();
         try {
-            st = conn.prepareStatement(GET_BY_CATEGORIA);
-            st.setString(1, categoria);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                listaCodigos.add(rs.getString("codigo"));
+            PreparedStatement statement = conn.prepareStatement(GET_BY_CATEGORIA);
+            statement.setString(1, String.valueOf(getIdCategoria(categoria)));
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                listaCodigos.add(resultSet.getString("codigo"));
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            System.out.println("NULL");
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return null;
         }
         return listaCodigos;
     }
@@ -217,23 +186,17 @@ public class ModeloDAO {
      * Métodos para Obtener todos los Códigos de los Modelos mediante la Sección
      */
 
-    public List<String> getCodigosModelosBySeccion (String seccion) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public List<String> getCodigosModelosBySeccion (String seccion) {
         List<String> listaCodigos = new ArrayList<>();
         try {
-            st = conn.prepareStatement(GET_BY_SECCION);
-            st.setString(1, seccion);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                listaCodigos.add(rs.getString("codigo"));
+            PreparedStatement statement = conn.prepareStatement(GET_BY_SECCION);
+            statement.setString(1, String.valueOf(getIdSeccion(seccion)));
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                listaCodigos.add(resultSet.getString("codigo"));
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            System.out.println("NULL");
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return null;
         }
         return listaCodigos;
     }
@@ -243,12 +206,20 @@ public class ModeloDAO {
      */
 
     private Modelo convertir (ResultSet rs) throws SQLException {
-        String id = rs.getString("id");
         String codigo = rs.getString("codigo");
         String idseccion = rs.getString("id_seccion");
         String idCategoria = rs.getString("id_categoria");
-        Modelo modelo = new Modelo(codigo, idseccion, idCategoria);
-        modelo.setId(id);
+        String idModeloSeccion = getModeloSeccion(idseccion);
+        String idModeloCategoria = getModeloCategoria(idCategoria);
+        Modelo modelo = new Modelo(codigo, idModeloSeccion, idModeloCategoria);
         return modelo;
+    }
+
+    private String getModeloSeccion (String seccion) {
+        return this.seccionDAO.getSeccionById(Integer.parseInt(seccion));
+    }
+
+    private String getModeloCategoria (String categoria) {
+        return this.categoriaDAO.getCategoriaById(Integer.parseInt(categoria));
     }
 }

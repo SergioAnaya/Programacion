@@ -1206,6 +1206,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <ColNames>id_tipo_elemento</ColNames>
       <RefTableName>tipo_elemento</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="308" parent="291" name="id">
       <Position>1</Position>

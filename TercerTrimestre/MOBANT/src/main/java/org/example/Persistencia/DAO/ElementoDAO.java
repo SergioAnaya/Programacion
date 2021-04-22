@@ -1,14 +1,13 @@
 package org.example.Persistencia.DAO;
 
 import org.example.Modelo.Elemento;
-import org.example.Persistencia.DBConnection;
 
+import javax.xml.transform.stax.StAXResult;
+import java.security.interfaces.ECKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ElementoDAO {
 
@@ -16,7 +15,6 @@ public class ElementoDAO {
      * Instancias
      */
 
-    private DBConnection dbConnection = new DBConnection();
     private Connection conn;
     private TipoElementoDAO tipoElementoDAO;
 
@@ -24,70 +22,61 @@ public class ElementoDAO {
      * Constantes
      */
 
-    private final static String INSERT = "INSERT INTO elemento(codigo, id_tipo_elemento) VALUES(?, (SELECT id FROM tipo_elemento WHERE id = ?))";
+    private final static String INSERT = "INSERT INTO elemento(id, codigo, id_tipo_elemento) VALUES(?, ?, ?)";
     private final static String UPDATE = "UPDATE elemento SET codigo = ? WHERE codigo = ?";
     private final static String DELETE = "DELETE FROM elemento WHERE codigo = ?";
     private final static String GET_BY_CODIGO = "SELECT id, codigo, id_tipo_elemento FROM elemento WHERE codigo = ?";
     private final static String GET_BY_ID = "SELECT id, codigo, id_tipo_elemento FROM elemento WHERE id = ?";
-    private final static String GETALL = "SELECT id, codigo, id_tipo_elemento FROM elemento";
 
     /**
      * Constructor con Conexión a la Base de Datos
      */
 
     public ElementoDAO (Connection conn) throws SQLException {
-        conn = dbConnection.conectar();
         this.conn = conn;
+        tipoElementoDAO = new TipoElementoDAO(conn);
     }
 
     /**
      * Método para Crear un nuevo Elemento
      */
 
-    public boolean crear (Elemento elemento) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+
+    public boolean crear (Elemento elemento) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(INSERT, st.RETURN_GENERATED_KEYS);
-            st.setString(1, elemento.getCodigo());
-            st.setString(2, elemento.getIdTipoElemento());
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(INSERT);
+            statement.setString(1, null);
+            statement.setString(2, elemento.getCodigo());
+            statement.setString(3, String.valueOf(getIdTipo(elemento.getTipo())));
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
-            rs = st.getGeneratedKeys();
-            if (rs.next()) {
-                elemento.setId(rs.getString(1));
-            } else System.out.println("No se pudo asignar el ID a el Elemento");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
+    }
+
+    private int getIdTipo (String tipo) {
+        return this.tipoElementoDAO.getId(tipo);
     }
 
     /**
      * Método para Obtener un Elemento mediante su Codigo
      */
 
-    public Elemento leer (String codigo) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public Elemento leer (String codigo) {
         Elemento elemento = null;
         try {
-            st = conn.prepareStatement(GET_BY_CODIGO);
-            st.setString(1, codigo);
-            rs = st.executeQuery();
-            if (rs.next()) {
-                elemento = convertir(rs);
-            } else System.out.println("Error al obtener el Elemento");
+            PreparedStatement statement = conn.prepareStatement(GET_BY_CODIGO);
+            statement.setString(1, codigo);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                elemento = convertir(resultSet);
+            }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return elemento;
         }
         return elemento;
     }
@@ -96,22 +85,17 @@ public class ElementoDAO {
      * Método para Obtener el ID de un Elemento mediante su Código
      */
 
-    public int getId (String codigo) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public int getId (String codigo) {
         int resultado = -1;
         try {
-            st = conn.prepareStatement(GET_BY_CODIGO);
-            st.setString(1, codigo);
-            rs = st.executeQuery();
-            if (rs.next()) {
-                resultado = Integer.parseInt(rs.getString("id"));
-            } else System.out.println("Error al obtener el ID del Elemento");
+            PreparedStatement statement = conn.prepareStatement(GET_BY_CODIGO);
+            statement.setString(1, codigo);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                resultado = Integer.parseInt(resultSet.getString("id"));
+            }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return -1;
         }
         return resultado;
     }
@@ -120,23 +104,17 @@ public class ElementoDAO {
      * Método para Obtener un Elemento mediante su ID
      */
 
-    public Elemento getElementoById (int id) throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
+    public Elemento getElementoById (int id) {
         Elemento elemento = null;
         try {
-            st = conn.prepareStatement(GET_BY_ID);
-            st.setString(1, String.valueOf(id));
-            rs = st.executeQuery();
-            if (rs.next()) {
-                elemento = new Elemento();
-                elemento = convertir(rs);
-            } else System.out.println("Error al obtener el Elemento");
+            PreparedStatement statement = conn.prepareStatement(GET_BY_ID);
+            statement.setString(1, String.valueOf(id));
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                elemento = convertir(resultSet);
+            }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rs != null || st != null) {
-            dbConnection.desconectar();
+            return null;
         }
         return elemento;
     }
@@ -145,21 +123,17 @@ public class ElementoDAO {
      * Método para Actualizar el Código de un Elemento
      */
 
-    public boolean actualizar (String codigo, String nuevoCodigo) throws SQLException {
-        PreparedStatement st = null;
+    public boolean actualizar (String codigo, String nuevoCodigo) {
         boolean respuesta = false;
         try {
-            st = conn.prepareStatement(UPDATE);
-            st.setString(1, nuevoCodigo);
-            st.setString(2, codigo);
-            if (st.executeUpdate() != 0) {
+            PreparedStatement statement = conn.prepareStatement(UPDATE);
+            statement.setString(1, nuevoCodigo);
+            statement.setString(2, codigo);
+            if (statement.executeUpdate() != 0) {
                 respuesta = true;
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (st != null) {
-            dbConnection.desconectar();
+            return respuesta;
         }
         return respuesta;
     }
@@ -168,34 +142,33 @@ public class ElementoDAO {
      * Método para Eliminar un Elemento mediante su Código
      */
 
-    public boolean borrar (String codigo) throws SQLException {
-        PreparedStatement st = null;
-        boolean resultado = false;
+    public boolean borrar (String codigo) {
+        boolean respuesta = false;
         try {
-            st = conn.prepareStatement(DELETE);
-            st.setString(1, codigo);
-            if (st.executeUpdate() != 0) {
-                resultado = true;
+            PreparedStatement statement = conn.prepareStatement(DELETE);
+            statement.setString(1, codigo);
+            if (statement.executeUpdate() != 0) {
+                respuesta = true;
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            return false;
         }
-        if (st != null) {
-            dbConnection.desconectar();
-        }
-        return resultado;
+        return respuesta;
     }
 
     /**
      * Método para Convertir a objetos los Elementos para su posterior uso
      */
 
-    public Elemento convertir (ResultSet rs) throws SQLException {
-        String id = rs.getString("id");
-        String codigo = rs.getString("codigo");
-        String idTipoElemento = rs.getString("id_tipo_elemento");
-        Elemento elemento = new Elemento(codigo, idTipoElemento);
-        elemento.setId(id);
+    public Elemento convertir (ResultSet resultSet) throws SQLException {
+        String codigo = resultSet.getString("codigo");
+        String idTipoElemento = resultSet.getString("id_tipo_elemento");
+        String tipoElemento = getElementoTipo(idTipoElemento);
+        Elemento elemento = new Elemento(tipoElemento, codigo);
         return elemento;
+    }
+
+    private String getElementoTipo (String codigo) {
+        return this.tipoElementoDAO.getTipoElementoById(Integer.parseInt(codigo));
     }
 }

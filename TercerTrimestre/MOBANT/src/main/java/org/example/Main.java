@@ -3,7 +3,7 @@ package org.example;
 import org.example.Modelo.Elemento;
 import org.example.Persistencia.DAO.CategoriaDAO;
 import org.example.Persistencia.DAO.ElementoDAO;
-import org.example.Persistencia.DBConnection;
+import org.example.Persistencia.DBConn;
 
 import java.sql.SQLException;
 
@@ -11,10 +11,10 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        DBConnection dbConnection = new DBConnection();
+        DBConn dbConn = new DBConn();
 
-        CategoriaDAO categoriaDAO = new CategoriaDAO(dbConnection.conectar());
-        ElementoDAO elementoDAO = new ElementoDAO(dbConnection.conectar());
+        CategoriaDAO categoriaDAO = new CategoriaDAO(dbConn.conectar());
+        ElementoDAO elementoDAO = new ElementoDAO(dbConn.conectar());
 
         /**
          * CategoriaDAO
@@ -32,8 +32,9 @@ public class Main {
          * ElementoDAO
          */
 
-        System.out.println(elementoDAO.crear(new Elemento("sc340", "65")));
 
+
+        System.out.println(elementoDAO.leer("silla"));
     }
 
 
