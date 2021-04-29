@@ -1,5 +1,6 @@
-package org.example.Modelo;
+package org.example.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Modelo {
@@ -20,6 +21,7 @@ public class Modelo {
         this.codigo = codigo;
         this.seccion = seccion;
         this.categoria = categoria;
+        this.elementos = new ArrayList<>();
     }
 
     public Modelo(String codigo, String seccion, String categoria, List<Elemento> elementos) {
@@ -28,10 +30,6 @@ public class Modelo {
         this.categoria = categoria;
         this.elementos = elementos;
     }
-
-    /**
-     * Getters y Setter
-     */
 
     public String getCodigo() {
         return codigo;
@@ -45,17 +43,31 @@ public class Modelo {
         return seccion;
     }
 
-    public void setSeccion(String idSeccion) {
-        this.seccion = idSeccion;
+    public void setSeccion(String seccion) {
+        this.seccion = seccion;
     }
 
     public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String idCategoria) {
-        this.categoria = idCategoria;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
+
+    public List<Elemento> getElementos() {
+        return elementos;
+    }
+
+    public void setElementos(List<Elemento> elementos) {
+        this.elementos = elementos;
+    }
+
+    /**
+     * Getters y Setter
+     */
+
+
 
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
-package org.example.Persistencia.DAO;
+package org.example.persistencia.dao;
 
-import org.example.Modelo.Modelo;
+import org.example.modelo.Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

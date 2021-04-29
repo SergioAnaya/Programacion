@@ -1,9 +1,7 @@
-package org.example.Persistencia.DAO;
+package org.example.persistencia.dao;
 
-import org.example.Modelo.Elemento;
+import org.example.modelo.Elemento;
 
-import javax.xml.transform.stax.StAXResult;
-import java.security.interfaces.ECKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

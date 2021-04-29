@@ -1,4 +1,4 @@
-package org.example.Persistencia.DAO;
+package org.example.persistencia.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

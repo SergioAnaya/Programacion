@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.Persistencia.DAO.SeccionDAO;
-import org.example.Persistencia.DBConn;
+import org.example.persistencia.dao.SeccionDAO;
+import org.example.persistencia.DBConn;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

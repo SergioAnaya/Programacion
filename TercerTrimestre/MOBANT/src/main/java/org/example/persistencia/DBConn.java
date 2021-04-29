@@ -1,4 +1,4 @@
-package org.example.Persistencia;
+package org.example.persistencia;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,8 +26,12 @@ public class DBConn {
      * Método para Conectarse a la Base de Datos
      */
 
-    public static Connection conectar() throws SQLException {
-        conn = DriverManager.getConnection(url, userLogin, passLogin);
+    public static Connection conectar() {
+        try {
+            conn = DriverManager.getConnection(url, userLogin, passLogin);
+        } catch (SQLException throwables) {
+            return null;
+        }
         return conn;
     }
 

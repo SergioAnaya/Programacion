@@ -1,10 +1,10 @@
 package org.example;
 
-import org.example.Modelo.Modelo;
-import org.example.Persistencia.DAO.CategoriaDAO;
-import org.example.Persistencia.DAO.ModeloDAO;
-import org.example.Persistencia.DAO.SeccionDAO;
-import org.example.Persistencia.DBConn;
+import org.example.modelo.Modelo;
+import org.example.persistencia.dao.CategoriaDAO;
+import org.example.persistencia.dao.ModeloDAO;
+import org.example.persistencia.dao.SeccionDAO;
+import org.example.persistencia.DBConn;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

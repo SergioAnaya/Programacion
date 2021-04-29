@@ -1,9 +1,9 @@
 package org.example;
 
-import org.example.Modelo.Elemento;
-import org.example.Persistencia.DAO.ElementoDAO;
-import org.example.Persistencia.DAO.TipoElementoDAO;
-import org.example.Persistencia.DBConn;
+import org.example.modelo.Elemento;
+import org.example.persistencia.dao.ElementoDAO;
+import org.example.persistencia.dao.TipoElementoDAO;
+import org.example.persistencia.DBConn;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

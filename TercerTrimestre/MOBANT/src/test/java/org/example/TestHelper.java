@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.Persistencia.DBConn;
+import org.example.persistencia.DBConn;
 
 import java.sql.Connection;
 import java.sql.SQLException;

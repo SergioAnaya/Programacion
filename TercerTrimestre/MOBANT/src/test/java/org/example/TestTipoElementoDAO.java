@@ -1,8 +1,7 @@
 package org.example;
 
-import org.example.Persistencia.DAO.TipoElementoDAO;
-import org.example.Persistencia.DBConn;
-import org.example.TestHelper;
+import org.example.persistencia.dao.TipoElementoDAO;
+import org.example.persistencia.DBConn;
 
 
 import java.sql.Connection;

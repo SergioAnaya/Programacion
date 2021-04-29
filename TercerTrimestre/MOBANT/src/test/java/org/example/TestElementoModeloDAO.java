@@ -1,10 +1,9 @@
 package org.example;
 
-import org.example.Modelo.Elemento;
-import org.example.Modelo.Modelo;
-import org.example.Persistencia.DAO.*;
-import org.example.Persistencia.DBConn;
-import org.example.TestHelper;
+import org.example.modelo.Elemento;
+import org.example.modelo.Modelo;
+import org.example.persistencia.dao.*;
+import org.example.persistencia.DBConn;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -1,4 +1,6 @@
-package org.example.Modelo;
+package org.example.modelo;
+
+import java.util.Objects;
 
 public class Elemento {
 
@@ -44,4 +46,13 @@ public class Elemento {
                 ", tipo='" + tipo + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Elemento elemento = (Elemento) o;
+        return Objects.equals(codigo, elemento.codigo);
+    }
+
 }
