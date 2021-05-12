@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.logica.Persona;
 import org.example.logica.Personas;
 import org.example.vista.Ventana;
 
@@ -11,6 +12,11 @@ public class App {
 
     public static void main(String[] args) {
         Personas personas = new Personas();
+
+        personas.add(new Persona("nombre1", 21, "12345678A", Persona.ASALARIADO));
+        personas.add(new Persona("nombre2", 20, "12345678B", Persona.POR_HORAS));
+        personas.add(new Persona("nombre3", 19, "12345678C", Persona.COMISIONADO));
+
         Ventana ventana = new Ventana(personas);
 
         JFrame frame = new JFrame("Ventana");
