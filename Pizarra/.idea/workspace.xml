@@ -20,8 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3906ecab-be22-4e85-91fc-3b53ed80e51d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SegundoTrimestre/ExamenTrim2/Concesionario/.idea/discord.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SegundoTrimestre/ExamenTrim2/Concesionario/src/Persistencia/LectorVendedores.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SegundoTrimestre/ExamenTrim2/Concesionario/src/Persistencia/LectorVendedores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SegundoTrimestre/EjercicioEvaluable3-2trim/.idea/csv-plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SegundoTrimestre/EjercicioEvaluable3-2trim/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SegundoTrimestre/EjercicioEvaluable3-2trim/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SegundoTrimestre/ExamenTrim2/Concesionario/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SegundoTrimestre/ExamenTrim2/Concesionario/.idea/csv-plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SegundoTrimestre/RepasosExamen/RepasoExamen2Trim/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SegundoTrimestre/RepasosExamen/RepasoExamen2Trim/.idea/csv-plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SegundoTrimestre/RepasosExamen/RepasoExamen2Trim/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SegundoTrimestre/RepasosExamen/RepasoExamen2Trim/.idea/vcs.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +64,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SegundoTrimestre/EjercicioEvaluable3-2trim" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunManager">
@@ -84,6 +91,8 @@
       <updated>1615487571060</updated>
       <workItem from="1617562611509" duration="11650000" />
       <workItem from="1617630859743" duration="1206000" />
+      <workItem from="1620832300825" duration="149000" />
+      <workItem from="1620834259760" duration="1323000" />
     </task>
     <servers />
   </component>
